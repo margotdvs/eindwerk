@@ -1,5 +1,9 @@
 @import "imports/variables";
 
 body {
-  background-color: $green;
+  font-family: $font-family;
+  background: $background;
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0;
 }
