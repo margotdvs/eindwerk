@@ -2,8 +2,11 @@
 
 body {
   font-family: $font-family;
-  background: $background;
+  background: linear-gradient(to bottom, $blue-light, $blue-dark);
   background-repeat: no-repeat;
   height: 100vh;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
