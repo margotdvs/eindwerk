@@ -1,15 +1,13 @@
 <template>
   <div>
-  <h1>Page Two</h1>
+    <h1>Games Overview</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PageTwo',
-}
+  name: "Games",
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -3,18 +3,46 @@
     <div class="logo">Gamerviews</div>
     <div class="nav">
       <NuxtLink :class="'nav-item'" to="/"> Home </NuxtLink>
-      <NuxtLink :class="'nav-item'" to="/page-2"> Page Two </NuxtLink>
+      <NuxtLink :class="'nav-item'" to="/games"> Games </NuxtLink>
       <NuxtLink :class="'nav-item'" to="/contact"> Contact </NuxtLink>
     </div>
     <div class="nav">
-      <NuxtLink :class="'nav-item'" to="/"> Login </NuxtLink>
+      <NuxtLink :class="'nav-item'" to="/login"> Login </NuxtLink>
     </div>
+    <div class="hamburger-wrap">
+      <button class="hamburger" @click="menuOpen = !menuOpen">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__middle"></span>
+        <span class="icon-bar hamburger__line"></span>
+      </button>
+    </div>
+  </div>
+  <div class="dropdown" :class="{ 'dropdown-after': menuOpen }">
+    <ul class="navlist">
+      <li class="navlistitem">
+        <NuxtLink :class="'navitem-dropdown'" to="/"> Home </NuxtLink>
+      </li>
+      <li class="navlistitem">
+        <NuxtLink :class="'navitem-dropdown'" to="/games"> Games </NuxtLink>
+      </li>
+      <li class="navlistitem">
+        <NuxtLink :class="'navitem-dropdown'" to="/contact"> Contact </NuxtLink>
+      </li>
+      <li class="navlistitem">
+        <NuxtLink :class="'navitem-dropdown'" to="/login"> Login </NuxtLink>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      menuOpen: false,
+    };
+  },
 };
 </script>
 
@@ -23,11 +51,12 @@ export default {
   padding: 1rem 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   border-radius: 25px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  margin: 4rem 0 0 0;
+  margin: 4rem 0;
 }
 
 .logo {
@@ -36,8 +65,6 @@ export default {
 }
 
 .nav {
-  // padding: 0 2rem;
-
   &-item {
     text-decoration: none;
     color: white;
@@ -67,5 +94,68 @@ export default {
       color: black;
     }
   }
+}
+
+.hamburger {
+  width: 45px;
+  height: 45px;
+  background-color: transparent;
+  border: transparent;
+  margin-right: 32px;
+  cursor: pointer;
+}
+
+.hamburger-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.hamburger__line,
+.hamburger__middle {
+  display: block;
+  width: 30px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: white;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.hamburger__middle {
+  width: 20px;
+  margin-left: 10px;
+}
+
+.dropdown {
+  margin-top: -20px;
+  height: 0px;
+  transition: height 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dropdown-after {
+  height: calc(100vh - 50px);
+  transition: height 0.2s ease;
+}
+
+.navlist {
+  list-style: none;
+}
+
+.navlistitem {
+  text-align: center;
+  padding: 1rem 0;
+
+  &:last-of-type {
+    padding: 5rem 0;
+  }
+}
+
+.navitem-dropdown {
+  text-decoration: none;
+  color: white;
 }
 </style>

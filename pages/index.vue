@@ -1,6 +1,6 @@
 <template>
   <div class="index-page">
-    <h1 class="index-page__title">My index page</h1>
+    <h1 class="index-page__title">Homepage</h1>
     <Test />
   </div>
 </template>
@@ -13,10 +13,6 @@ export default {
 
 <style lang="scss">
 .index-page {
-  // width: 1200px;
-
-  &__title {
-    color: $gold;
-  }
+  width: 100%;
 }
 </style>

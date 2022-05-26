@@ -13,6 +13,5 @@ export default {
   padding: 2rem 0;
   display: flex;
   justify-content: space-between;
-  width: 1200px;
 }
 </style>

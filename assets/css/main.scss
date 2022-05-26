@@ -4,9 +4,22 @@ body {
   font-family: $font-family;
   background: linear-gradient(to bottom, $blue-light, $blue-dark);
   background-repeat: no-repeat;
-  height: 100vh;
+  background-size: 100%;
   margin: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+html {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }

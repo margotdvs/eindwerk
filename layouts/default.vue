@@ -22,25 +22,12 @@ export default {
 
 <style lang="scss">
 .hero {
-  width: 1200px;
+  max-width: 1200px;
+  padding: 0 2rem;
 }
-
-// header {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// }
 
 footer {
   position: absolute;
   bottom: 0;
 }
-
-// main {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// }
 </style>
