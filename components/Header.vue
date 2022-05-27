@@ -20,16 +20,40 @@
   <div class="dropdown" :class="{ 'dropdown-after': menuOpen }">
     <ul class="navlist">
       <li class="navlistitem">
-        <NuxtLink :class="'navitem-dropdown'" to="/"> Home </NuxtLink>
+        <NuxtLink
+          :class="'navitem-dropdown'"
+          to="/"
+          @click="menuOpen = !menuOpen"
+        >
+          Home
+        </NuxtLink>
       </li>
       <li class="navlistitem">
-        <NuxtLink :class="'navitem-dropdown'" to="/games"> Games </NuxtLink>
+        <NuxtLink
+          :class="'navitem-dropdown'"
+          to="/games"
+          @click="menuOpen = !menuOpen"
+        >
+          Games
+        </NuxtLink>
       </li>
       <li class="navlistitem">
-        <NuxtLink :class="'navitem-dropdown'" to="/contact"> Contact </NuxtLink>
+        <NuxtLink
+          :class="'navitem-dropdown'"
+          to="/contact"
+          @click="menuOpen = !menuOpen"
+        >
+          Contact
+        </NuxtLink>
       </li>
       <li class="navlistitem">
-        <NuxtLink :class="'navitem-dropdown'" to="/login"> Login </NuxtLink>
+        <NuxtLink
+          :class="'navitem-dropdown'"
+          to="/login"
+          @click="menuOpen = !menuOpen"
+        >
+          Login
+        </NuxtLink>
       </li>
     </ul>
   </div>
@@ -48,7 +72,7 @@ export default {
 
 <style lang="scss">
 .header-container {
-  padding: 1rem 0;
+  padding: 0.25rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
