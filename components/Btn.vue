@@ -16,7 +16,6 @@ export default {
   font-weight: 700;
   font-size: 16px;
   padding: 12px 16px;
-  // width: 50%;
   position: relative;
   cursor: pointer;
   border-radius: 25px;
