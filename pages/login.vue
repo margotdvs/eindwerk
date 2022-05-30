@@ -1,16 +1,14 @@
 <template>
   <h1>Login</h1>
-  <div class="form">
-    <FormKit type="form" submit-label="login">
-      <FormKit type="email" name="email" label="E-mail" validation="required" />
-      <FormKit
-        type="password"
-        name="password"
-        label="Password"
-        validation="required"
-      />
-    </FormKit>
-  </div>
+  <FormKit type="form" submit-label="login">
+    <FormKit type="email" name="email" label="E-mail" validation="required" />
+    <FormKit
+      type="password"
+      name="password"
+      label="Password"
+      validation="required"
+    />
+  </FormKit>
 </template>
 
 <script>
@@ -23,7 +21,6 @@ export default {
 
 <style lang="scss">
 .formkit-inner {
-  border-color: white;
   width: 100%;
   border-radius: 25px;
   background-color: rgba(0, 0, 0, 0.2);
