@@ -7,7 +7,7 @@
       <NuxtLink :class="'nav-item'" to="/contact"> Contact </NuxtLink>
     </div>
     <div class="nav">
-      <NuxtLink :class="'nav-item'" to="/login"> Login </NuxtLink>
+      <NuxtLink v-if="!authStore.isLoggedIn" :class="'nav-item'" to="/login"> Login </NuxtLink>
     </div>
     <div class="hamburger-wrap">
       <button class="hamburger" @click="menuOpen = !menuOpen">
@@ -46,7 +46,7 @@
           Contact
         </NuxtLink>
       </li>
-      <li class="navlistitem">
+      <li v-if="!authStore.isLoggedIn" class="navlistitem">
         <NuxtLink
           :class="'navitem-dropdown'"
           to="/login"
@@ -55,7 +55,7 @@
           Login
         </NuxtLink>
       </li>
-      <li class="navlistitem">
+      <li v-else class="navlistitem">
         <NuxtLink
           :class="'navitem-dropdown'"
           to="/profile"
@@ -69,11 +69,14 @@
 </template>
 
 <script>
+import { useAuthStore } from '~/stores/auth.js';
+
 export default {
   name: "Header",
   data() {
     return {
       menuOpen: false,
+      authStore: useAuthStore(),
     };
   },
 };

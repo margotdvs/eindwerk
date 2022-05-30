@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('auth', {
       this.accessToken = accessToken;
       this.refreshToken = refreshToken;
 
-      fetch("https://margot.fullstacksyntra.be/users/me", {
+      return fetch("https://margot.fullstacksyntra.be/users/me", {
         "method": "GET",
         "headers": {
           "Authorization": `Bearer ${this.accessToken}`,
