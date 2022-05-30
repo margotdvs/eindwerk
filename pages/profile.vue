@@ -34,6 +34,9 @@
         </FormKit>
       </div>
     </div>
+    <NuxtLink to="/addgame">
+      <button>Add Game</button>
+    </NuxtLink>
   </div>
 </template>
 
