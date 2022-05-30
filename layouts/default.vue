@@ -24,6 +24,7 @@ export default {
 .hero {
   max-width: 1200px;
   padding: 0 2rem;
+  height: 100%;
 }
 
 footer {
