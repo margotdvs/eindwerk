@@ -55,6 +55,15 @@
           Login
         </NuxtLink>
       </li>
+      <li class="navlistitem">
+        <NuxtLink
+          :class="'navitem-dropdown'"
+          to="/profile"
+          @click="menuOpen = !menuOpen"
+        >
+          Profile
+        </NuxtLink>
+      </li>
     </ul>
   </div>
 </template>
