@@ -4,6 +4,10 @@ import { defineNuxtConfig } from "nuxt";
 export default defineNuxtConfig({
   css: ["~/assets/css/main.scss"],
   modules: ["@formkit/nuxt"],
+  buildModules: [
+    '@pinia/nuxt',
+  ],
+  ssr: false,
   vite: {
     css: {
       preprocessorOptions: {
