@@ -9,7 +9,7 @@
       Laudantium, maiores animi?</span
     >
     <NuxtLink to="/game">
-      <Btn></Btn>
+      <Btn>Read More</Btn>
     </NuxtLink>
   </div>
 </template>
