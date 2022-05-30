@@ -1,4 +1,5 @@
 <template>
+  <div>
   <h1>Profile</h1>
   <div class="profile-container">
     <div class="profile-left"><div class="profile-image">image</div></div>
@@ -31,11 +32,17 @@
       </FormKit>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "Profile",
+  setup() {
+    definePageMeta({
+      middleware: ['auth'],
+    })
+  }
 };
 </script>
 

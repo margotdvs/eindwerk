@@ -50,7 +50,9 @@ export default {
         })
         .then((body) => {
           console.log(body);
-          this.authStore.login(body.data.access_token, body.data.refresh_token);
+          this.authStore.login(body.data.access_token, body.data.refresh_token).then(() => {
+            this.$router.push('/profile');
+          }) ;
         })
         .catch((err) => {
           console.error(err);
