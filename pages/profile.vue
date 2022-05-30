@@ -1,36 +1,38 @@
 <template>
-  <h1>Profile</h1>
-  <div class="profile-container">
-    <div class="profile-left">
-      <div class="profile-image">image</div>
-    </div>
-    <div class="profile-details">
-      <FormKit type="form" submit-label="Edit">
-        <FormKit
-          type="text"
-          name="username"
-          label="Username"
-          validation="required"
-        />
-        <FormKit
-          type="email"
-          name="email"
-          label="E-mail"
-          validation="required"
-        />
-        <FormKit
-          type="password"
-          name="password"
-          label="Password"
-          validation="required"
-        />
-        <FormKit
-          type="password"
-          name="newPassword"
-          label="New Password"
-          validation="required"
-        />
-      </FormKit>
+  <div>
+    <h1>Profile</h1>
+    <div class="profile-container">
+      <div class="profile-left">
+        <div class="profile-image">image</div>
+      </div>
+      <div class="profile-details">
+        <FormKit type="form" submit-label="Edit">
+          <FormKit
+            type="text"
+            name="username"
+            label="Username"
+            validation="required"
+          />
+          <FormKit
+            type="email"
+            name="email"
+            label="E-mail"
+            validation="required"
+          />
+          <FormKit
+            type="password"
+            name="password"
+            label="Password"
+            validation="required"
+          />
+          <FormKit
+            type="password"
+            name="newPassword"
+            label="New Password"
+            validation="required"
+          />
+        </FormKit>
+      </div>
     </div>
   </div>
 </template>

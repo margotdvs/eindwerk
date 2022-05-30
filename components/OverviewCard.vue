@@ -8,7 +8,9 @@
       fugiat modi unde, vero, natus amet blanditiis, beatae magnam dolore.
       Laudantium, maiores animi?</span
     >
-    <Btn></Btn>
+    <NuxtLink to="/game">
+      <Btn></Btn>
+    </NuxtLink>
   </div>
 </template>
 
