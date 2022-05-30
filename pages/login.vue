@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <h1>Login</h1>
   <FormKit type="form" submit-label="login">
     <FormKit type="email" name="email" label="E-mail" validation="required" />
@@ -9,13 +10,61 @@
       validation="required"
     />
   </FormKit>
+=======
+  <div>
+    <h1>Login</h1>
+    <div class="form">
+      <FormKit type="form" submit-label="login" @submit="login">
+        <FormKit type="email" name="email" label="E-mail" validation="required" />
+        <FormKit
+          type="password"
+          name="password"
+          label="Password"
+          validation="required"
+        />
+      </FormKit>
+    </div>
+  </div>
+>>>>>>> 61737fa09797192e93c6e961d442b8b31df85f65
 </template>
 
 <script>
+import {useAuthStore} from '~/stores/auth.js';
 import "@formkit/themes/genesis";
 
 export default {
   name: "Login",
+  data() {
+    return {
+      authStore: useAuthStore(),
+    }
+  },
+  methods: {
+    login(data) {
+      fetch("https://margot.fullstacksyntra.be/auth/login", {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(data),
+      })
+          .then(response => {
+            console.log(response);
+            if (!response.ok) {
+              throw new Error(`Can't login`);
+            }
+
+            return response.json();
+          })
+          .then(body => {
+            console.log(body);
+            this.authStore.login(body.data.access_token, body.data.refresh_token);
+          })
+          .catch(err => {
+            console.error(err);
+          });
+    }
+  }
 };
 </script>
 
