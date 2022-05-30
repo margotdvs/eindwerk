@@ -1,7 +1,9 @@
 <template>
   <h1>Profile</h1>
   <div class="profile-container">
-    <div class="profile-left"><div class="profile-image">image</div></div>
+    <div class="profile-left">
+      <div class="profile-image">image</div>
+    </div>
     <div class="profile-details">
       <FormKit type="form" submit-label="Edit">
         <FormKit
