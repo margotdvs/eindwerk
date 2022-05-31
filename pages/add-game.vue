@@ -47,7 +47,7 @@
 
 <script>
 export default {
-  name: "addGame",
+  name: "add-game",
 };
 </script>
 
