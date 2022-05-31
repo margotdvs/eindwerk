@@ -1,0 +1,14 @@
+{
+  "env": {
+    "vue/setup-compiler-macros": true
+  },
+  "plugins": ["prettier"],
+  "extends": [
+    "@nuxtjs/eslint-config-typescript",
+    "plugin:nuxt/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "vue/multi-word-component-names": "off"
+  }
+}

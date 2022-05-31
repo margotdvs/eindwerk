@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import { useAuthStore } from "~/stores/auth.js";
-import "@formkit/themes/genesis";
+import { useAuthStore } from '~/stores/auth.js';
+import '@formkit/themes/genesis';
 
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
       authStore: useAuthStore(),
@@ -33,10 +33,10 @@ export default {
   },
   methods: {
     login(data) {
-      fetch("https://margot.fullstacksyntra.be/auth/login", {
-        method: "POST",
+      fetch('https://margot.fullstacksyntra.be/auth/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       })
@@ -50,9 +50,11 @@ export default {
         })
         .then((body) => {
           console.log(body);
-          this.authStore.login(body.data.access_token, body.data.refresh_token).then(() => {
-            this.$router.push('/profile');
-          }) ;
+          this.authStore
+            .login(body.data.access_token, body.data.refresh_token)
+            .then(() => {
+              this.$router.push('/profile');
+            });
         })
         .catch((err) => {
           console.error(err);
@@ -70,6 +72,15 @@ export default {
   backdrop-filter: blur(10px);
   padding: 0.5rem;
   box-shadow: none;
+
+  &:focus-within {
+    border: none;
+    box-shadow: none;
+  }
+
+  &.no-background {
+    background-color: transparent;
+  }
 }
 
 .formkit-form {

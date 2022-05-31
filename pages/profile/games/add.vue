@@ -2,7 +2,7 @@
   <div>
     <h1>Add Game</h1>
 
-    <FormKit type="form" submit-label="Save">
+    <FormKit v-model="data" type="form" submit-label="Save">
       <FormKit
         type="text"
         name="title"
@@ -24,7 +24,12 @@
         max="10"
         validation="required"
       />
-      <FormKit type="text" name="tags" label="Tags" />
+      <FormKit
+        inner-class="no-background"
+        :type="tagInput"
+        name="tags"
+        label="Tags"
+      />
       <FormKit
         type="textarea"
         name="short_description"
@@ -32,22 +37,32 @@
         maxlength="450"
         validation="required"
       />
-      <FormKit
-        type="file"
-        name="images"
-        label="Images"
-        accept=".jpg, .jpeg .png"
-        validation="required"
-        multiple
-      />
-      <FormKit type="textarea" name="description" label="Game description" />
     </FormKit>
   </div>
 </template>
 
 <script>
+import { createInput } from '@formkit/vue';
+import TagInput from '~/components/TagInput.vue';
+
+definePageMeta({
+  // middleware: ['auth'],
+});
+
 export default {
-  name: "addGame",
+  name: 'AddGame',
+  data() {
+    return {
+      tagInput: createInput(TagInput),
+      data: {
+        title: 'test',
+        title_img: '',
+        score: '',
+        tags: '',
+        short_description: '',
+      },
+    };
+  },
 };
 </script>
 

@@ -39,13 +39,12 @@
 </template>
 
 <script>
+definePageMeta({
+  middleware: ["auth"],
+});
+
 export default {
   name: "Profile",
-  setup() {
-    definePageMeta({
-      middleware: ["auth"],
-    });
-  },
 };
 </script>
 
