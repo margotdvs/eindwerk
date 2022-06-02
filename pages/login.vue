@@ -2,7 +2,12 @@
   <div>
     <h1>Login</h1>
     <div>
-      <FormKit type="form" submit-label="login" @submit="login">
+      <FormKit
+        v-model="loginData"
+        type="form"
+        submit-label="login"
+        @submit="login"
+      >
         <FormKit
           type="email"
           name="email"
@@ -21,17 +26,24 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
 import { useAuthStore } from '~/stores/auth.js';
 import '@formkit/themes/genesis';
+import { useNotificationsStore } from '~/stores/notifications.js';
 
 export default {
   name: 'Login',
   data() {
     return {
       authStore: useAuthStore(),
+      loginData: {
+        email: 'korneel.eeckhout@gmail.com',
+        password: 'JNbEj27usbGzUhvZlAwh',
+      },
     };
   },
   methods: {
+    ...mapActions(useNotificationsStore, ['addError', 'addMessage']),
     login(data) {
       fetch('https://margot.fullstacksyntra.be/auth/login', {
         method: 'POST',
@@ -41,7 +53,6 @@ export default {
         body: JSON.stringify(data),
       })
         .then((response) => {
-          console.log(response);
           if (!response.ok) {
             throw new Error(`Can't login`);
           }
@@ -49,15 +60,17 @@ export default {
           return response.json();
         })
         .then((body) => {
-          console.log(body);
           this.authStore
             .login(body.data.access_token, body.data.refresh_token)
-            .then(() => {
+            .then((user) => {
+              this.addMessage(`Logged in as ${user.first_name}`);
               this.$router.push('/profile');
             });
         })
         .catch((err) => {
           console.error(err);
+          this.addError('Could not login, check email and password');
+          this.authStore.logout();
         });
     },
   },

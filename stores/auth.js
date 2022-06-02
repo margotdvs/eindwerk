@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('auth', {
   state: () => {
@@ -6,12 +6,12 @@ export const useAuthStore = defineStore('auth', {
       accessToken: null,
       refreshToken: null,
       user: null,
-    }
+    };
   },
   getters: {
     isLoggedIn() {
       return this.accessToken !== null;
-    }
+    },
   },
   actions: {
     logout() {
@@ -23,25 +23,23 @@ export const useAuthStore = defineStore('auth', {
       this.accessToken = accessToken;
       this.refreshToken = refreshToken;
 
-      return fetch("https://margot.fullstacksyntra.be/users/me", {
-        "method": "GET",
-        "headers": {
-          "Authorization": `Bearer ${this.accessToken}`,
-        }
+      return fetch('https://margot.fullstacksyntra.be/users/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`,
+        },
       })
-        .then(response => {
+        .then((response) => {
           if (!response.ok) {
             throw new Error('Could not fetch user data');
           }
 
           return response.json();
         })
-        .then(body => {
+        .then((body) => {
           this.user = body.data;
-        })
-        .catch(err => {
-          this.logout();
+          return this.user;
         });
-    }
+    },
   },
-})
+});

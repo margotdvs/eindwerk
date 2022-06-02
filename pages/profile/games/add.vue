@@ -46,7 +46,7 @@ import { createInput } from '@formkit/vue';
 import TagInput from '~/components/TagInput.vue';
 
 definePageMeta({
-  // middleware: ['auth'],
+  middleware: ['auth'],
 });
 
 export default {
@@ -58,7 +58,7 @@ export default {
         title: 'test',
         title_img: '',
         score: '',
-        tags: '',
+        tags: [1, 3],
         short_description: '',
       },
     };

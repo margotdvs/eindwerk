@@ -7,9 +7,13 @@
         <NuxtLink :class="'nav-item'" to="/games"> Games </NuxtLink>
         <NuxtLink :class="'nav-item'" to="/contact"> Contact </NuxtLink>
       </div>
-      <div class="nav">
-        <NuxtLink v-if="!authStore.isLoggedIn" :class="'nav-item'" to="/login">
-          Login
+      <div v-if="!authStore.isLoggedIn" class="nav">
+        <NuxtLink :class="'nav-item'" to="/login"> Login </NuxtLink>
+      </div>
+      <div v-else class="nav">
+        <NuxtLink :class="'nav-item'" to="/profile"> Profile </NuxtLink>
+        <NuxtLink :class="'nav-item'" to="/profile/games/add">
+          Add Game
         </NuxtLink>
       </div>
     </div>
@@ -73,10 +77,10 @@
 </template>
 
 <script>
-import { useAuthStore } from "~/stores/auth.js";
+import { useAuthStore } from '~/stores/auth.js';
 
 export default {
-  name: "Header",
+  name: 'Header',
   data() {
     return {
       menuOpen: false,
@@ -116,7 +120,7 @@ export default {
     cursor: pointer;
     white-space: nowrap;
     &::before {
-      content: " ";
+      content: ' ';
       position: absolute;
       top: 0;
       left: 0;

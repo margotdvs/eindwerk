@@ -6,11 +6,12 @@
         class="tag-input__input-field"
         type="text"
         @input="search"
+        @keydown.enter.prevent
       />
       <div class="tag-input__input-options">
         <button
           v-for="searchItem in searchResult"
-          :key="searchItem.id"
+          :key="'searchResult' + searchItem.id"
           class="tag-input__input-option"
           type="button"
           @click="addExisting(searchItem)"
@@ -19,7 +20,7 @@
         </button>
 
         <button
-          v-if="curInput.length > 3"
+          v-if="curInput.length > 2"
           class="tag-input__input-option"
           type="button"
           @click="addNew"
@@ -29,9 +30,15 @@
       </div>
     </div>
     <div v-else class="tag-input__container">
-      <button type="button" class="tag-input__item">3</button>
-      <button type="button" class="tag-input__item">4</button>
-      <button type="button" class="tag-input__item">5</button>
+      <button
+        v-for="selectedTag in selectedTags"
+        :key="'selectedTag' + selectedTag.id"
+        type="button"
+        class="tag-input__item"
+        @click="removeItem(selectedTag.id)"
+      >
+        {{ selectedTag.tag }}
+      </button>
     </div>
     <div class="tag-input__btn-container">
       <button
@@ -41,19 +48,15 @@
       >
         {{ addInputActive ? 'Cancel' : 'Add tag' }}
       </button>
-      <button
-        v-if="addInputActive"
-        type="button"
-        class="tag-input__save-btn"
-        @click="save"
-      >
-        Save
-      </button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia';
+import { useAuthStore } from '~/stores/auth.js';
+import { useNotificationsStore } from '~/stores/notifications.js';
+
 export default {
   name: 'TagInput',
   props: {
@@ -63,18 +66,122 @@ export default {
     },
   },
   data() {
-    return { curInput: '', addInputActive: false, searchResult: [] };
+    console.log(this.context._value);
+    return {
+      selectedTags: [],
+      curInput: '',
+      addInputActive: false,
+      searchResult: [],
+    };
+  },
+  mounted() {
+    this.init();
+  },
+  computed: {
+    ...mapState(useAuthStore, ['accessToken']),
+    selectedTagIds() {
+      return this.selectedTags.map((selectedTag) => selectedTag.id);
+    },
+    searchQueryParams() {
+      const queryParams = new URLSearchParams();
+      queryParams.append('search', this.curInput);
+      queryParams.append('limit', 5);
+      if (this.selectedTags.length > 0) {
+        queryParams.append('filter[id][_nin]', this.selectedTagIds);
+      }
+
+      return queryParams.toString();
+    },
   },
   methods: {
+    ...mapActions(useNotificationsStore, ['addError']),
+    removeItem(id) {
+      this.selectedTags = this.selectedTags.filter(
+        (selectedTag) => selectedTag.id !== id,
+      );
+
+      this.formKitInput();
+    },
+    init() {
+      const params = new URLSearchParams();
+      params.append('filter[id][_in]', this.context._value);
+
+      fetch(
+        'https://margot.fullstacksyntra.be/items/tags?' + params.toString(),
+        {
+          method: 'GET',
+          headers: {},
+        },
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Could not fetch tags');
+          }
+
+          return response.json();
+        })
+        .then((body) => {
+          this.selectedTags = body.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    formKitInput(item) {
+      if (item) {
+        this.selectedTags.push(item);
+        this.curInput = '';
+        this.addInputActive = false;
+        this.searchResult = [];
+      }
+
+      const copyTagIds = [...this.selectedTagIds];
+      this.context.node.input(copyTagIds);
+    },
     toggleAddInputActive() {
       this.addInputActive = !this.addInputActive;
     },
-    addExisting(searchItem) {},
-    addNew() {},
-    save() {},
+    addExisting(searchItem) {
+      this.formKitInput(searchItem);
+    },
+    addNew() {
+      fetch('https://margot.fullstacksyntra.be/items/tags', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.accessToken}`,
+        },
+        body: JSON.stringify({
+          tag: this.curInput,
+        }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((body) => {
+          if (body.errors) {
+            body.errors.forEach((errorMessage) => {
+              if (errorMessage.extensions.code === 'RECORD_NOT_UNIQUE') {
+                this.addError(`${this.curInput} already exists`);
+              }
+            });
+
+            return;
+          }
+          this.formKitInput(body.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
     search() {
+      if (this.curInput.length === 0) {
+        this.searchResult = [];
+        return;
+      }
+
       fetch(
-        `https://margot.fullstacksyntra.be/items/tags?search=${this.curInput}&limit=5`,
+        `https://margot.fullstacksyntra.be/items/tags?${this.searchQueryParams}`,
         {
           method: 'GET',
           headers: {},
