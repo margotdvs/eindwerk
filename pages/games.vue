@@ -38,5 +38,10 @@ h1 {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   gap: 1rem;
+
+  @media screen and (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>

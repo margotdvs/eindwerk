@@ -31,7 +31,7 @@
           />
         </FormKit>
       </div>
-      <NuxtLink to="/addgame">
+      <NuxtLink to="/add-game">
         <Btn>Add Game</Btn>
       </NuxtLink>
     </div>
