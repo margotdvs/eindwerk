@@ -42,6 +42,16 @@ export default {
       },
     };
   },
+  watch: {
+    authStore: {
+      handler(authStore) {
+        if (authStore.isLoggedIn) {
+          this.$router.push('/profile');
+        }
+      },
+      deep: true,
+    },
+  },
   methods: {
     ...mapActions(useNotificationsStore, ['addError', 'addMessage']),
     login(data) {
@@ -64,7 +74,6 @@ export default {
             .login(body.data.access_token, body.data.refresh_token)
             .then((user) => {
               this.addMessage(`Logged in as ${user.first_name}`);
-              this.$router.push('/profile');
             });
         })
         .catch((err) => {
