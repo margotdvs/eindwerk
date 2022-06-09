@@ -31,20 +31,17 @@
           />
         </FormKit>
       </div>
-      <NuxtLink to="/add-game">
-        <Btn>Add Game</Btn>
-      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script>
 definePageMeta({
-  middleware: ["auth"],
+  middleware: ['auth'],
 });
 
 export default {
-  name: "Profile",
+  name: 'Profile',
 };
 </script>
 

@@ -15,6 +15,7 @@
         <NuxtLink :class="'nav-item'" to="/profile/games/add">
           Add Game
         </NuxtLink>
+        <NuxtLink :class="'nav-item'">Logout</NuxtLink>
       </div>
     </div>
     <div class="hamburger-wrap">

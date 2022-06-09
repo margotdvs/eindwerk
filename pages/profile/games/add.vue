@@ -129,7 +129,6 @@ export default {
             throw new Error('Could not upload file');
           }
 
-
           if (!response.ok) {
             throw new Error('Could not upload file');
           }
@@ -151,8 +150,8 @@ export default {
 </script>
 
 <style lang="scss">
-.add-form {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
+// .add-form {
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+// }
 </style>
