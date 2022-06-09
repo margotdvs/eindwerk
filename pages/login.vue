@@ -102,6 +102,8 @@ export default {
 
   &.no-background {
     background-color: transparent;
+    display: block;
+    padding: 0;
   }
 }
 

@@ -66,7 +66,6 @@ export default {
     },
   },
   data() {
-    console.log(this.context._value);
     return {
       selectedTags: [],
       curInput: '',
@@ -214,7 +213,6 @@ export default {
     display: flex;
     justify-content: flex-start;
     gap: 0.5rem;
-    margin-left: -0.5rem;
     flex-wrap: wrap;
   }
 
@@ -230,7 +228,6 @@ export default {
 
   &__btn-container {
     display: flex;
-    margin-left: -0.5rem;
     gap: 0.5rem;
   }
 
@@ -250,8 +247,6 @@ export default {
 
   &__input {
     &-container {
-      width: calc(100% + 1rem);
-      margin-left: -0.5rem;
       border-radius: 25px;
       background-color: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(10px);

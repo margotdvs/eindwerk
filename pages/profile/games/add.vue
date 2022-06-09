@@ -46,6 +46,12 @@
         maxlength="450"
         validation="required"
       />
+      <FormKit
+        :type="reviewInput"
+        name="review"
+        label="Review"
+        inner-class="no-background"
+      />
     </FormKit>
   </div>
 </template>
@@ -54,6 +60,7 @@
 import { createInput } from '@formkit/vue';
 import { mapState, mapActions } from 'pinia';
 import TagInput from '~/components/TagInput.vue';
+import ReviewInput from '~/components/ReviewInput.vue';
 import { useAuthStore } from '~/stores/auth.js';
 
 definePageMeta({
@@ -65,13 +72,31 @@ export default {
   data() {
     return {
       tagInput: createInput(TagInput),
+      reviewInput: createInput(ReviewInput),
       data: {
         status: 'draft',
-        title: '',
+        name: '',
         title_image: [],
         score: '',
         tags: [],
         description_short: '',
+        review: [
+          {
+            subtitle: 'Historias volare in cubiculum!1',
+            text: 'Whisk each side of the cabbage with twenty tablespoons of cucumber. 11',
+            image: null,
+          },
+          {
+            subtitle: 'Historias volare in cubiculum!2',
+            text: 'Whisk each side of the cabbage with twenty tablespoons of cucumber. 22',
+            image: null,
+          },
+          {
+            subtitle: 'Historias volare in cubiculum!3',
+            text: 'Whisk each side of the cabbage with twenty tablespoons of cucumber. 33',
+            image: null,
+          },
+        ],
       },
     };
   },
@@ -81,6 +106,9 @@ export default {
   methods: {
     ...mapActions(useAuthStore, ['logout']),
     uploadFile(file) {
+      if (!file) {
+        return Promise.resolve(null);
+      }
       const body = new FormData();
       body.append('title', file.name);
       body.append('file', file.file);
@@ -128,7 +156,6 @@ export default {
           if (!response.ok) {
             throw new Error('Could not upload file');
           }
-
 
           if (!response.ok) {
             throw new Error('Could not upload file');
