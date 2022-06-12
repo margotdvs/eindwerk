@@ -26,7 +26,7 @@ export default {
   border-radius: 25px;
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  padding: 1.5rem;
+  padding-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;

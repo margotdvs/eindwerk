@@ -11,12 +11,20 @@
           <h3>{{ game.name }}</h3>
           <span>{{ game.description_short }}</span>
         </div>
-        <NuxtLink to="/game" :class="'card-bottom'">
+        <NuxtLink
+          :to="{ name: 'game', params: { id: game.id } }"
+          :class="'card-bottom'"
+        >
           <Btn>Read More</Btn>
         </NuxtLink>
       </OverviewCard>
     </div>
-    <div class="pagination"></div>
+    <div class="pagination">
+      <Btn>Previous</Btn>
+      <Btn>1</Btn>
+      <Btn>2</Btn>
+      <Btn>Next</Btn>
+    </div>
   </div>
 </template>
 
@@ -61,7 +69,7 @@ export default {
 <style lang="scss">
 h1 {
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
 }
 
 .filters-container {
@@ -90,5 +98,11 @@ h1 {
 .card-bottom {
   position: fixed;
   bottom: 1rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
 }
 </style>
