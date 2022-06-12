@@ -5,21 +5,56 @@
       <Filter />
     </div>
     <div class="cards-container">
-      <OverviewCard></OverviewCard>
-      <OverviewCard></OverviewCard>
-      <OverviewCard></OverviewCard>
-      <OverviewCard></OverviewCard>
+      <OverviewCard v-for="game in games" :key="game.id">
+        <div class="card-mid">
+          <div>{{ game.title_image }}</div>
+          <h3>{{ game.name }}</h3>
+          <span>{{ game.description_short }}</span>
+        </div>
+        <NuxtLink to="/game" :class="'card-bottom'">
+          <Btn>Read More</Btn>
+        </NuxtLink>
+      </OverviewCard>
     </div>
     <div class="pagination"></div>
   </div>
 </template>
 
 <script>
-import OverviewCard from "~~/components/OverviewCard.vue";
-import Filter from "~~/components/Filter.vue";
+import OverviewCard from '~~/components/OverviewCard.vue';
+import Filter from '~~/components/Filter.vue';
 export default {
   components: { OverviewCard, Filter },
-  name: "Games",
+  name: 'Games',
+  data() {
+    return {
+      games: [],
+    };
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      fetch('https://margot.fullstacksyntra.be/items/games', {
+        method: 'GET',
+        headers: {},
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Could not fetch games');
+          }
+
+          return response.json();
+        })
+        .then((body) => {
+          this.games = body.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  },
 };
 </script>
 
@@ -43,5 +78,17 @@ h1 {
     display: flex;
     flex-direction: column;
   }
+}
+
+.card-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.card-bottom {
+  position: fixed;
+  bottom: 1rem;
 }
 </style>

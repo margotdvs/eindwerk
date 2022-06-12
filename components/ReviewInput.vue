@@ -27,7 +27,7 @@
       <FormKit :ignore="true" type="file" label="Image" />
     </div>
     <div class="c-review-input__btns">
-      <button type="button" @click="addItem">Add item</button>
+      <button type="button" @click="addItem" class="btn">Add item</button>
     </div>
   </div>
 </template>
@@ -84,7 +84,7 @@ export default {
     border: 1px solid white;
     border-radius: 1rem;
     padding: 1rem;
-    margin-top: 1rem;
+    margin: 1rem 0;
 
     &-remove {
       position: absolute;

@@ -1,8 +1,8 @@
 <template>
   <div class="card-container">
-    <div>photo</div>
-    <h3>Game title</h3>
-    <span
+    <!-- <div>photo</div> -->
+    <!-- <h3>Game title</h3> -->
+    <!-- <span
       >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut deleniti
       expedita itaque accusantium commodi laudantium voluptatibus consequuntur
       fugiat modi unde, vero, natus amet blanditiis, beatae magnam dolore.
@@ -10,13 +10,14 @@
     >
     <NuxtLink to="/game">
       <Btn>Read More</Btn>
-    </NuxtLink>
+    </NuxtLink> -->
+    <slot />
   </div>
 </template>
 
 <script>
 export default {
-  name: "OverviewCard",
+  name: 'OverviewCard',
 };
 </script>
 
