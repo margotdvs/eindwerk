@@ -7,7 +7,7 @@
     <div class="cards-container">
       <OverviewCard v-for="game in games" :key="game.id">
         <div class="card-mid">
-          <div>{{ game.title_image }}</div>
+          <div class="card-image">{{ game.title_image }}</div>
           <h3>{{ game.name }}</h3>
           <span>{{ game.description_short }}</span>
         </div>
@@ -86,6 +86,10 @@ h1 {
     display: flex;
     flex-direction: column;
   }
+}
+
+.card-image {
+  border-radius: 25px;
 }
 
 .card-mid {
