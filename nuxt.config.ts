@@ -1,12 +1,14 @@
-import { defineNuxtConfig } from "nuxt";
+import { defineNuxtConfig } from 'nuxt';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  css: ["~/assets/css/main.scss"],
-  modules: ["@formkit/nuxt"],
-  buildModules: [
-    '@pinia/nuxt',
-  ],
+  target: 'static',
+  router: {
+    base: '/eindwerk/',
+  },
+  css: ['~/assets/css/main.scss'],
+  modules: ['@formkit/nuxt'],
+  buildModules: ['@pinia/nuxt'],
   ssr: false,
   vite: {
     css: {

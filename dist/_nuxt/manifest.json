@@ -1,0 +1,96 @@
+{
+  "node_modules/nuxt/dist/app/entry.mjs": {
+    "file": "entry-cf580ef6.mjs",
+    "src": "node_modules/nuxt/dist/app/entry.mjs",
+    "isEntry": true,
+    "dynamicImports": [
+      "pages/contact.vue",
+      "pages/game.vue",
+      "pages/games.vue",
+      "pages/index.vue",
+      "pages/login.vue",
+      "pages/profile/games/add.vue",
+      "pages/profile/index.vue",
+      "middleware/auth.js",
+      "layouts/default.vue"
+    ],
+    "css": [
+      "entry.ebd20d81.css"
+    ]
+  },
+  "pages/contact.vue": {
+    "file": "contact-b2518760.mjs",
+    "src": "pages/contact.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/game.vue": {
+    "file": "game-a07a2a2b.mjs",
+    "src": "pages/game.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/games.vue": {
+    "file": "games-6b5dd108.mjs",
+    "src": "pages/games.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/index.vue": {
+    "file": "index-0d1f40db.mjs",
+    "src": "pages/index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/login.vue": {
+    "file": "login-89974610.mjs",
+    "src": "pages/login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/profile/games/add.vue": {
+    "file": "add-96fcf7f2.mjs",
+    "src": "pages/profile/games/add.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/profile/index.vue": {
+    "file": "index-753614e9.mjs",
+    "src": "pages/profile/index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "middleware/auth.js": {
+    "file": "auth-a96bd552.mjs",
+    "src": "middleware/auth.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "layouts/default.vue": {
+    "file": "default-c99d162f.mjs",
+    "src": "layouts/default.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ],
+    "css": [
+      "default.6f7589bb.css"
+    ]
+  }
+}
