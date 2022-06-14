@@ -20,6 +20,7 @@
         </div>
       </div>
     </div>
+    <p>{{ $route.params.id }}</p>
     <CommentForm />
   </div>
 </template>
