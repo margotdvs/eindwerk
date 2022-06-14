@@ -1,16 +1,5 @@
 <template>
   <div class="card-container">
-    <!-- <div>photo</div> -->
-    <!-- <h3>Game title</h3> -->
-    <!-- <span
-      >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ut deleniti
-      expedita itaque accusantium commodi laudantium voluptatibus consequuntur
-      fugiat modi unde, vero, natus amet blanditiis, beatae magnam dolore.
-      Laudantium, maiores animi?</span
-    >
-    <NuxtLink to="/game">
-      <Btn>Read More</Btn>
-    </NuxtLink> -->
     <slot />
   </div>
 </template>

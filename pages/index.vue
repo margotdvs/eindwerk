@@ -1,13 +1,13 @@
 <template>
   <div class="index-page">
     <h1 class="index-page__title">Homepage</h1>
-    <Test />
+    <GenreOverview />
   </div>
 </template>
 
 <script>
 export default {
-  name: "IndexPage",
+  name: 'IndexPage',
 };
 </script>
 
