@@ -15,7 +15,7 @@
       type="file"
       name="title_image"
       label="Title image"
-      accept=".jpg, .jpeg .png"
+      accept=".jpg, .jpeg, .png, .gif"
     />
     <FormKit
       type="number"
