@@ -9,10 +9,10 @@
         <div class="card-mid">
           <div class="card-image">{{ game.title_image }}</div>
           <h3>{{ game.name }}</h3>
-          <span>{{ game.description_short }}</span>
+          <span class="card-description">{{ game.description_short }}</span>
         </div>
         <NuxtLink
-          :to="{ name: 'game', params: { id: game.id } }"
+          :to="{ name: 'games', params: game.id }"
           :class="'card-bottom'"
         >
           <Btn>Read More</Btn>
@@ -80,7 +80,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-  gap: 1rem;
+  gap: 2rem 1rem;
 
   @media screen and (max-width: 800px) {
     display: flex;
@@ -97,6 +97,10 @@ h1 {
   flex-direction: column;
   align-items: center;
   margin-bottom: 2.5rem;
+}
+
+.card-description {
+  padding: 0 2rem;
 }
 
 .card-bottom {

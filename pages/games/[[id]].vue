@@ -1,15 +1,18 @@
 <template>
   <div>
-    <h1>Game Title</h1>
+    <h1>{{ game.name }}</h1>
+    <div>{{ game.title_image }}</div>
     <div class="game-description">
-      <span
-        >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, illum.
-        Eveniet laborum ipsa sequi. Dolorem doloremque officiis impedit maxime
-        exercitationem hic illo architecto rem alias. Nam corrupti accusamus
-        quisquam odit.</span
-      >
-      <span class="game-score">Score / 10</span>
+      <span>{{ game.description_short }}</span>
+      <span class="game-score">Score {{ game.score }} / 10</span>
     </div>
+
+    <div v-for="item in review" :class="'game-review'">
+      <div>{{ item.image }}</div>
+      <h3>{{ item.subtitle }}</h3>
+      <span> {{ item.text }} </span>
+    </div>
+
     <div>
       <h2>Comments</h2>
       <div class="comments-container">
@@ -28,6 +31,39 @@
 <script>
 export default {
   name: 'Game',
+  data() {
+    return {
+      game: [],
+      review: [],
+    };
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      fetch('https://margot.fullstacksyntra.be/items/games/14', {
+        method: 'GET',
+        headers: {},
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Could not fetch game');
+          }
+
+          return response.json();
+        })
+        .then((body) => {
+          this.game = body.data;
+          console.log(this.game);
+          this.review = this.game.review;
+          console.log(this.review);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  },
 };
 </script>
 
@@ -42,6 +78,7 @@ export default {
   text-align: center;
   font-weight: 700;
   font-size: 21px;
+  color: white;
 }
 
 h2 {
@@ -67,4 +104,9 @@ h2 {
 .comment-username {
   margin-top: 0;
 }
+
+// .game-review {
+//   display: flex;
+//   flex-direction: column;
+// }
 </style>
