@@ -69,7 +69,7 @@ export default {
   justify-content: flex-end;
   padding-bottom: 0;
   height: 250px;
-  background-image: url(/assets/images/images/gaming.jpg);
+  // background-image: url(/assets/images/images/gaming.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

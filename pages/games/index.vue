@@ -17,10 +17,7 @@
           <h3>{{ game.name }}</h3>
           <span class="card-description">{{ game.description_short }}</span>
         </div>
-        <NuxtLink
-          :to="{ name: 'games', params: game.id }"
-          :class="'card-bottom'"
-        >
+        <NuxtLink :to="'/games/' + game.id" :class="'card-bottom'">
           <Btn>Read More</Btn>
         </NuxtLink>
       </OverviewCard>
