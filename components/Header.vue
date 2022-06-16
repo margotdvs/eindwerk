@@ -15,7 +15,7 @@
         <NuxtLink :class="'nav-item'" to="/profile/games/add">
           Add Game
         </NuxtLink>
-        <NuxtLink :class="'nav-item'">Logout</NuxtLink>
+        <NuxtLink :class="'nav-item'" @click="logout">Logout</NuxtLink>
       </div>
     </div>
     <div class="hamburger-wrap">
@@ -87,6 +87,12 @@ export default {
       menuOpen: false,
       authStore: useAuthStore(),
     };
+  },
+  methods: {
+    logout() {
+      this.authStore.logout();
+      this.$router.push('/');
+    },
   },
 };
 </script>
