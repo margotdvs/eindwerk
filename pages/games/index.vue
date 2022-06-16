@@ -15,6 +15,7 @@
         </div>
         <div class="card-mid">
           <h3>{{ game.name }}</h3>
+          <span class="card-score">{{ game.score }} / 10</span>
           <span class="card-description">{{ game.description_short }}</span>
         </div>
         <NuxtLink :to="'/games/' + game.id" :class="'card-bottom'">
@@ -34,6 +35,7 @@
 <script>
 import OverviewCard from '~~/components/OverviewCard.vue';
 import Filter from '~~/components/Filter.vue';
+
 export default {
   components: { OverviewCard, Filter },
   name: 'Games',
@@ -47,6 +49,8 @@ export default {
   },
   methods: {
     init() {
+      document.body.classList.add('loading');
+
       fetch('https://margot.fullstacksyntra.be/items/games', {
         method: 'GET',
         headers: {},
@@ -63,6 +67,9 @@ export default {
         })
         .catch((err) => {
           console.error(err);
+        })
+        .finally(() => {
+          document.body.classList.remove('loading');
         });
     },
   },
@@ -107,6 +114,14 @@ h1 {
   flex-direction: column;
   align-items: center;
   margin-bottom: 2.5rem;
+}
+
+.card-score {
+  color: white;
+  width: 100%;
+  padding: 0 2rem;
+  margin: 0;
+  text-align: right;
 }
 
 .card-description {

@@ -2,7 +2,7 @@
   <div class="homepage-container">
     <NuxtLink to="/games" v-for="tag in tags" :key="tag.id">
       <OverviewCard :class="'homepage-card'">
-        <h2>{{ tag.tag }}</h2>
+        <h3>{{ tag.tag }}</h3>
       </OverviewCard>
     </NuxtLink>
   </div>
@@ -68,16 +68,17 @@ export default {
   display: flex;
   justify-content: flex-end;
   padding-bottom: 0;
-  height: 250px;
+  padding: 0.5rem;
+  // height: 250px;
   // background-image: url(/assets/images/images/gaming.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 
-  h2 {
-    margin: 1rem 0;
-    padding-bottom: 1rem;
-  }
+  // h2 {
+  //   margin: 1rem 0;
+  //   padding-bottom: 1rem;
+  // }
 }
 a {
   text-decoration: none;
