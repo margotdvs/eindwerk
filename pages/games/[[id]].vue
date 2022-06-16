@@ -1,15 +1,26 @@
 <template>
   <div>
     <h1>{{ game.name }}</h1>
-    <div>{{ game.title_image }}</div>
+    <div class="game-title-image">
+      <img
+        v-bind:src="
+          'https://margot.fullstacksyntra.be/assets/' + game.title_image
+        "
+      />
+    </div>
     <div class="game-description">
       <span>{{ game.description_short }}</span>
       <span class="game-score">Score {{ game.score }} / 10</span>
     </div>
 
     <div v-for="item in review" :class="'game-review'">
-      <div>{{ item.image }}</div>
       <h3>{{ item.subtitle }}</h3>
+
+      <div class="game-review-image">
+        <img
+          v-bind:src="'https://margot.fullstacksyntra.be/assets/' + item.image"
+        />
+      </div>
       <span> {{ item.text }} </span>
     </div>
 
@@ -23,7 +34,7 @@
         </div>
       </div>
     </div>
-    <p>{{ $route.params.id }}</p>
+    <!-- <p>{{ $route.params.id }}</p> -->
     <CommentForm />
   </div>
 </template>
@@ -35,6 +46,7 @@ export default {
     return {
       game: [],
       review: [],
+      id: this.$route.params.id,
     };
   },
   mounted() {
@@ -42,7 +54,7 @@ export default {
   },
   methods: {
     init() {
-      fetch('https://margot.fullstacksyntra.be/items/games/14', {
+      fetch(`https://margot.fullstacksyntra.be/items/games/${this.id}`, {
         method: 'GET',
         headers: {},
       })
@@ -72,13 +84,18 @@ export default {
   display: grid;
   grid-template-columns: 70% 30%;
   margin-bottom: 2rem;
+  line-height: 1.5rem;
+  text-align: justify;
+  margin-top: 1.5rem;
 }
 
 .game-score {
-  text-align: center;
   font-weight: 700;
   font-size: 21px;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 h2 {
@@ -105,8 +122,43 @@ h2 {
   margin-top: 0;
 }
 
-// .game-review {
-//   display: flex;
-//   flex-direction: column;
+.game-title-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    border-radius: 25px;
+    width: 100%;
+  }
+}
+
+.game-review {
+  display: flex;
+  flex-direction: column;
+
+  img {
+    // width: 60%;
+    width: 100%;
+    border-radius: 25px;
+  }
+
+  span {
+    // width: 60%;
+    line-height: 1.5rem;
+    text-align: justify;
+  }
+}
+
+// .game-review:nth-of-type(even) {
+//   .game-review-image {
+//     display: flex;
+//     justify-content: flex-end;
+//   }
+
+//   span {
+//     display: flex;
+//     justify-content: flex-end;
+//   }
 // }
 </style>

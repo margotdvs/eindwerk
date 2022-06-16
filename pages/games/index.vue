@@ -6,8 +6,14 @@
     </div>
     <div class="cards-container">
       <OverviewCard v-for="game in games" :key="game.id">
+        <div class="card-image">
+          <img
+            v-bind:src="
+              'https://margot.fullstacksyntra.be/assets/' + game.title_image
+            "
+          />
+        </div>
         <div class="card-mid">
-          <div class="card-image">{{ game.title_image }}</div>
           <h3>{{ game.name }}</h3>
           <span class="card-description">{{ game.description_short }}</span>
         </div>
@@ -89,7 +95,14 @@ h1 {
 }
 
 .card-image {
-  border-radius: 25px;
+  width: 100%;
+  height: 175px;
+  img {
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+  }
 }
 
 .card-mid {
