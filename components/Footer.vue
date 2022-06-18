@@ -7,7 +7,7 @@
         target="_blank"
         rel="noreferrer noopener"
       >
-        <img src="/assets/images/facebook.png" />
+        <img src="~~/assets/images/facebook.png" />
       </NuxtLink>
       <NuxtLink
         to="https://www.instagram.com"
