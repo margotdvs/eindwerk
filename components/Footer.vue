@@ -1,26 +1,29 @@
 <template>
   <div class="footer-container">
-    <NuxtLink
-      to="https://www.facebook.com"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <img src="/assets/images/facebook.png" />
-    </NuxtLink>
-    <NuxtLink
-      to="https://www.instagram.com"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <img src="/assets/images/instagram.png" />
-    </NuxtLink>
-    <NuxtLink
-      to="https://www.linkedin.com"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <img src="/assets/images/linkedin.png" />
-    </NuxtLink>
+    <div class="footer-left">Gamerviews © Margot De Vos</div>
+    <div>
+      <NuxtLink
+        to="https://www.facebook.com"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <img src="/assets/images/facebook.png" />
+      </NuxtLink>
+      <NuxtLink
+        to="https://www.instagram.com"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <img src="/assets/images/instagram.png" />
+      </NuxtLink>
+      <NuxtLink
+        to="https://www.linkedin.com"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <img src="/assets/images/linkedin.png" />
+      </NuxtLink>
+    </div>
   </div>
 </template>
 
@@ -34,6 +37,12 @@ export default {
 .footer-container {
   padding: 4rem 0 0;
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
+}
+
+.footer-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
