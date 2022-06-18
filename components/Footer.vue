@@ -14,14 +14,14 @@
         target="_blank"
         rel="noreferrer noopener"
       >
-        <img src="/assets/images/instagram.png" />
+        <img src="~~/assets/images/instagram.png" />
       </NuxtLink>
       <NuxtLink
         to="https://www.linkedin.com"
         target="_blank"
         rel="noreferrer noopener"
       >
-        <img src="/assets/images/linkedin.png" />
+        <img src="~~/assets/images/linkedin.png" />
       </NuxtLink>
     </div>
   </div>
