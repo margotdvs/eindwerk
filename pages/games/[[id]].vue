@@ -41,7 +41,6 @@
         submit-label="Submit"
         @submit="uploadComment"
       >
-        <!-- <FormKit type="text" name="username" label="Username" /> -->
         <FormKit
           type="textarea"
           name="comment"
@@ -49,7 +48,7 @@
           validation="required"
         />
       </FormKit>
-      {{ this.addComment }}
+      {{ addComment }}
     </div>
   </div>
 </template>
@@ -97,17 +96,28 @@ export default {
           console.error(err);
         });
     },
-    uploadComment() {
-      const options = {
+    uploadComment(addComment) {
+      console.log(addComment);
+      let body = addComment;
+
+      fetch('https://margot.fullstacksyntra.be/items/comments', {
         method: 'POST',
         headers: {},
-        body: this.addComment,
-      };
+        body,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Could not post comment');
+          }
 
-      fetch('https://margot.fullstacksyntra.be/items/comments', options)
-        .then((response) => response.json())
-        .then((response) => console.log(response))
-        .catch((err) => console.error(err));
+          return response.json();
+        })
+        .then((body) => {
+          return body.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
   },
 };
