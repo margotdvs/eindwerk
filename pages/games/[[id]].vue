@@ -44,11 +44,11 @@
         <FormKit
           type="textarea"
           name="comment"
-          label="Comment"
+          label="Your comment"
           validation="required"
+          id="comment"
         />
       </FormKit>
-      {{ addComment }}
     </div>
   </div>
 </template>
@@ -77,7 +77,7 @@ export default {
         `https://margot.fullstacksyntra.be/items/games/${this.id}?fields=*,comments.*`,
         {
           method: 'GET',
-          headers: {},
+          headers: { 'Content-Type': 'application/json' },
         },
       )
         .then((response) => {
@@ -100,14 +100,22 @@ export default {
       console.log(addComment);
       const options = {
         method: 'POST',
-        mode: 'no-cors',
-        headers: {},
-        body: addComment,
+
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(addComment),
       };
 
       fetch('https://margot.fullstacksyntra.be/items/comments', options)
         .then((response) => response.json())
         .then((response) => console.log(response))
+        .then((body) => {
+          this.init();
+          document.getElementById('comment').value = '';
+
+          console.log(body);
+        })
         .catch((err) => console.error(err));
     },
   },
@@ -153,17 +161,17 @@ h2 {
   backdrop-filter: blur(10px);
   border-radius: 25px;
   width: 50%;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 // .comment-image {
 //   text-align: center;
 // }
 
-.comment-info {
-  display: flex;
-  flex-direction: column;
-}
+// .comment-info {
+//   display: flex;
+//   flex-direction: column;
+// }
 
 // .comment-username {
 //   margin-top: 0;
