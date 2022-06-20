@@ -98,26 +98,16 @@ export default {
     },
     uploadComment(addComment) {
       console.log(addComment);
-      let body = addComment;
-
-      fetch('https://margot.fullstacksyntra.be/items/comments', {
+      const options = {
         method: 'POST',
         headers: {},
-        body,
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Could not post comment');
-          }
+        body: addComment,
+      };
 
-          return response.json();
-        })
-        .then((body) => {
-          return body.data;
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      fetch('https://margot.fullstacksyntra.be/items/comments', options)
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
     },
   },
 };
