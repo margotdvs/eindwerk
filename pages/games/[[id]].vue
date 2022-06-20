@@ -100,6 +100,7 @@ export default {
       console.log(addComment);
       const options = {
         method: 'POST',
+        mode: 'no-cors',
         headers: {},
         body: addComment,
       };
