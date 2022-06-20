@@ -24,9 +24,9 @@
       </OverviewCard>
     </div>
     <div class="pagination">
-      <Btn>Previous</Btn>
+      <Btn @click="prevBtnClicked">Previous</Btn>
       <Btn v-for="i in totalPages" :key="i" @click="pageClicked">{{ i }}</Btn>
-      <Btn>Next</Btn>
+      <Btn @click="nextBtnClicked">Next</Btn>
     </div>
   </div>
 </template>
@@ -95,11 +95,23 @@ export default {
         this.init();
       }
     },
+    nextBtnClicked() {
+      this.curPage++;
+      this.init();
+    },
+    prevBtnClicked() {
+      this.curPage--;
+      this.init();
+    },
   },
 };
 </script>
 
 <style lang="scss">
+.inactive {
+  display: none;
+}
+
 h1 {
   text-align: center;
   margin-bottom: 3rem;
