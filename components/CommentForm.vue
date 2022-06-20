@@ -1,14 +1,15 @@
 <template>
   <div>
     <FormKit type="form" submit-label="Submit">
-      <FormKit type="textarea" name="comment" label="Your comment" />
+      <FormKit type="text" name="username" label="Username" />
+      <FormKit type="textarea" name="comment" label="Comment" />
     </FormKit>
   </div>
 </template>
 
 <script>
 export default {
-  name: "CommentForm",
+  name: 'CommentForm',
 };
 </script>
 

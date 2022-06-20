@@ -24,17 +24,16 @@
       <span> {{ item.text }} </span>
     </div>
 
-    <div>
+    <div class="comments">
       <h2>Comments</h2>
-      <div class="comments-container">
-        <div class="comment-image">Image</div>
+      <div class="comments-container" v-for="comment in comments">
+        <!-- <div class="comment-image">Image</div> -->
         <div class="comment-info">
           <span class="comment-username">Username</span>
-          <span>Comment user</span>
+          <span>{{ comment.comment }}</span>
         </div>
       </div>
     </div>
-    <!-- <p>{{ $route.params.id }}</p> -->
     <CommentForm />
   </div>
 </template>
@@ -47,6 +46,7 @@ export default {
       game: [],
       review: [],
       id: this.$route.params.id,
+      comments: [],
     };
   },
   mounted() {
@@ -54,10 +54,13 @@ export default {
   },
   methods: {
     init() {
-      fetch(`https://margot.fullstacksyntra.be/items/games/${this.id}`, {
-        method: 'GET',
-        headers: {},
-      })
+      fetch(
+        `https://margot.fullstacksyntra.be/items/games/${this.id}?fields=*,comments.*`,
+        {
+          method: 'GET',
+          headers: {},
+        },
+      )
         .then((response) => {
           if (!response.ok) {
             throw new Error('Could not fetch game');
@@ -67,9 +70,11 @@ export default {
         })
         .then((body) => {
           this.game = body.data;
-          console.log(this.game);
+          // console.log(this.game);
           this.review = this.game.review;
-          console.log(this.review);
+          // console.log(this.review);
+          this.comments = this.game.comments;
+          console.log(this.comments);
         })
         .catch((err) => {
           console.error(err);
@@ -103,15 +108,27 @@ h2 {
   margin-bottom: 3rem;
 }
 
-.comments-container {
-  display: grid;
-  grid-template-columns: 20% 80%;
-  margin-bottom: 3rem;
+.comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.comment-image {
-  text-align: center;
+.comments-container {
+  // display: grid;
+  // grid-template-columns: 20% 80%;
+  margin-bottom: 2rem;
+  border: 5px solid rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  width: 50%;
+  padding: 1rem;
 }
+
+// .comment-image {
+//   text-align: center;
+// }
 
 .comment-info {
   display: flex;
@@ -120,6 +137,7 @@ h2 {
 
 .comment-username {
   margin-top: 0;
+  text-align: center;
 }
 
 .game-title-image {
@@ -138,27 +156,13 @@ h2 {
   flex-direction: column;
 
   img {
-    // width: 60%;
     width: 100%;
     border-radius: 25px;
   }
 
   span {
-    // width: 60%;
     line-height: 1.5rem;
     text-align: justify;
   }
 }
-
-// .game-review:nth-of-type(even) {
-//   .game-review-image {
-//     display: flex;
-//     justify-content: flex-end;
-//   }
-
-//   span {
-//     display: flex;
-//     justify-content: flex-end;
-//   }
-// }
 </style>
