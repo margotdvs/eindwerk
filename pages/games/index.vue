@@ -25,7 +25,7 @@
     </div>
     <div class="pagination">
       <Btn>Previous</Btn>
-      <Btn v-for="i in totalPages" :key="i">{{ i }}</Btn>
+      <Btn v-for="i in totalPages" :key="i" @click="pageClicked">{{ i }}</Btn>
       <Btn>Next</Btn>
     </div>
   </div>
@@ -44,6 +44,7 @@ export default {
       totalItems: 0,
       limit: 8,
       totalPages: 0,
+      curPage: 1,
     };
   },
   mounted() {
@@ -51,8 +52,13 @@ export default {
   },
   methods: {
     init() {
+      let params = new URLSearchParams();
+
+      params.append('limit', this.limit);
+      params.append('page', this.curPage);
+      params.append('meta', 'total_count');
       fetch(
-        'https://margot.fullstacksyntra.be/items/games?limit=8&page=1&meta=total_count',
+        'https://margot.fullstacksyntra.be/items/games?' + params.toString(),
         {
           method: 'GET',
           headers: {},
@@ -80,6 +86,14 @@ export default {
     },
     calculatePages() {
       this.totalPages = Math.ceil(this.totalItems / this.limit);
+    },
+    pageClicked(event) {
+      let $target = event.target;
+
+      if ($target.matches('.btn')) {
+        this.curPage = $target.innerText;
+        this.init();
+      }
     },
   },
 };
