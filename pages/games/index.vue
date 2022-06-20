@@ -25,8 +25,7 @@
     </div>
     <div class="pagination">
       <Btn>Previous</Btn>
-      <Btn>1</Btn>
-      <Btn>2</Btn>
+      <Btn v-for="i in totalPages" :key="i">{{ i }}</Btn>
       <Btn>Next</Btn>
     </div>
   </div>
@@ -42,6 +41,9 @@ export default {
   data() {
     return {
       games: [],
+      totalItems: 0,
+      limit: 8,
+      totalPages: 0,
     };
   },
   mounted() {
@@ -49,12 +51,13 @@ export default {
   },
   methods: {
     init() {
-      document.body.classList.add('loading');
-
-      fetch('https://margot.fullstacksyntra.be/items/games', {
-        method: 'GET',
-        headers: {},
-      })
+      fetch(
+        'https://margot.fullstacksyntra.be/items/games?limit=8&page=1&meta=total_count',
+        {
+          method: 'GET',
+          headers: {},
+        },
+      )
         .then((response) => {
           if (!response.ok) {
             throw new Error('Could not fetch games');
@@ -64,13 +67,19 @@ export default {
         })
         .then((body) => {
           this.games = body.data;
+          this.totalItems = body.meta.total_count;
+          console.log(this.totalItems);
+          this.calculatePages();
         })
         .catch((err) => {
           console.error(err);
-        })
-        .finally(() => {
-          document.body.classList.remove('loading');
         });
+      // .finally(() => {
+      //   document.body.classList.remove('loading');
+      // });
+    },
+    calculatePages() {
+      this.totalPages = Math.ceil(this.totalItems / this.limit);
     },
   },
 };
