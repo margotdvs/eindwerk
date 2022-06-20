@@ -29,12 +29,28 @@
       <div class="comments-container" v-for="comment in comments">
         <!-- <div class="comment-image">Image</div> -->
         <div class="comment-info">
-          <span class="comment-username">Username</span>
+          <!-- <span class="comment-username">Username</span> -->
           <span>{{ comment.comment }}</span>
         </div>
       </div>
     </div>
-    <CommentForm />
+    <div>
+      <FormKit
+        v-model="addComment"
+        type="form"
+        submit-label="Submit"
+        @submit="uploadComment"
+      >
+        <!-- <FormKit type="text" name="username" label="Username" /> -->
+        <FormKit
+          type="textarea"
+          name="comment"
+          label="Comment"
+          validation="required"
+        />
+      </FormKit>
+      {{ this.addComment }}
+    </div>
   </div>
 </template>
 
@@ -47,6 +63,10 @@ export default {
       review: [],
       id: this.$route.params.id,
       comments: [],
+      addComment: {
+        game_id: this.$route.params.id,
+        comment: '',
+      },
     };
   },
   mounted() {
@@ -70,15 +90,24 @@ export default {
         })
         .then((body) => {
           this.game = body.data;
-          // console.log(this.game);
           this.review = this.game.review;
-          // console.log(this.review);
           this.comments = this.game.comments;
-          console.log(this.comments);
         })
         .catch((err) => {
           console.error(err);
         });
+    },
+    uploadComment() {
+      const options = {
+        method: 'POST',
+        headers: {},
+        body: this.addComment,
+      };
+
+      fetch('https://margot.fullstacksyntra.be/items/comments', options)
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err));
     },
   },
 };
@@ -135,10 +164,10 @@ h2 {
   flex-direction: column;
 }
 
-.comment-username {
-  margin-top: 0;
-  text-align: center;
-}
+// .comment-username {
+//   margin-top: 0;
+//   text-align: center;
+// }
 
 .game-title-image {
   display: flex;
