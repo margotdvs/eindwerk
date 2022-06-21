@@ -21,6 +21,8 @@ export const useAuthStore = defineStore('auth', {
       this.user = null;
     },
     login(accessToken, refreshToken) {
+      document.getElementById('loader').classList.add('loader');
+
       this.accessToken = accessToken;
       this.refreshToken = refreshToken;
 
@@ -40,6 +42,9 @@ export const useAuthStore = defineStore('auth', {
         .then((body) => {
           this.user = body.data;
           return this.user;
+        })
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
         });
     },
   },
