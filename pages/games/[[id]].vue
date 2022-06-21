@@ -1,6 +1,11 @@
 <template>
   <div>
     <h1>{{ game.name }}</h1>
+    <div class="tag-container">
+      <div v-for="tag in tags" :key="tag.id" class="tag">
+        <span> {{ tag.tags_id.tag }}</span>
+      </div>
+    </div>
     <div class="game-title-image">
       <img
         v-bind:src="
@@ -64,6 +69,7 @@ export default {
         game_id: this.$route.params.id,
         comment: '',
       },
+      tags: [],
     };
   },
   mounted() {
@@ -73,7 +79,7 @@ export default {
     init() {
       document.getElementById('loader').classList.add('loader');
       fetch(
-        `https://margot.fullstacksyntra.be/items/games/${this.id}?fields=*,comments.*`,
+        `https://margot.fullstacksyntra.be/items/games/${this.id}?fields=*,comments.comment,*,tags.tags_id.tag`,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -90,6 +96,7 @@ export default {
           this.game = body.data;
           this.review = this.game.review;
           this.comments = this.game.comments;
+          this.tags = this.game.tags;
         })
         .catch((err) => {
           console.error(err);
@@ -191,6 +198,27 @@ h2 {
   span {
     line-height: 1.5rem;
     text-align: justify;
+  }
+}
+
+.tag-container {
+  padding: 0.5rem 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+}
+
+.tag {
+  border: 5px solid rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  margin: 0 0.5rem;
+
+  span {
+    margin: 0.75rem 0;
   }
 }
 </style>
