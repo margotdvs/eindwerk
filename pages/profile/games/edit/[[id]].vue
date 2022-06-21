@@ -26,12 +26,13 @@ export default {
   },
   methods: {
     fetchGame() {
-      document.getElementById('loader').classList.add('loader');
+      // document.getElementById('loader').classList.add('loader');
       return fetch(
         `https://margot.fullstacksyntra.be/items/games/${this.gameId}`,
         {
           method: 'GET',
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${this.accessToken}`,
           },
         },
@@ -48,10 +49,10 @@ export default {
         })
         .catch((err) => {
           console.error(err);
-        })
-        .finally(() => {
-          document.getElementById('loader').classList.remove('loader');
         });
+      // .finally(() => {
+      //   document.getElementById('loader').classList.remove('loader');
+      // });
     },
   },
 };

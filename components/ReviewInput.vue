@@ -74,7 +74,7 @@ export default {
       return JSON.parse(JSON.stringify(this.context._value));
     },
     uploadFile(event) {
-      document.getElementById('loader').classList.add('loader');
+      // document.getElementById('loader').classList.add('loader');
 
       const file = event.target.files[0];
       console.log(file);
@@ -106,10 +106,10 @@ export default {
         .then((body) => {
           this.review[event.target.dataset.index].image = body.data.id;
           return body.data.id;
-        })
-        .finally(() => {
-          document.getElementById('loader').classList.remove('loader');
         });
+      // .finally(() => {
+      //   document.getElementById('loader').classList.remove('loader');
+      // });
     },
     addItem() {
       this.review.push({

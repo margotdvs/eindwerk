@@ -144,7 +144,7 @@ export default {
       this.formKitInput(searchItem);
     },
     addNew() {
-      document.getElementById('loader').classList.add('loader');
+      // document.getElementById('loader').classList.add('loader');
       fetch('https://margot.fullstacksyntra.be/items/tags', {
         method: 'POST',
         headers: {
@@ -172,13 +172,13 @@ export default {
         })
         .catch((err) => {
           console.error(err);
-        })
-        .finally(() => {
-          document.getElementById('loader').classList.remove('loader');
         });
+      // .finally(() => {
+      //   document.getElementById('loader').classList.remove('loader');
+      // });
     },
     search() {
-      document.getElementById('loader').classList.add('loader');
+      // document.getElementById('loader').classList.add('loader');
 
       if (this.curInput.length === 0) {
         this.searchResult = [];
@@ -205,10 +205,10 @@ export default {
         .catch((err) => {
           console.error(err);
           this.searchResult = [];
-        })
-        .finally(() => {
-          document.getElementById('loader').classList.remove('loader');
         });
+      // .finally(() => {
+      //   document.getElementById('loader').classList.remove('loader');
+      // });
     },
   },
 };

@@ -5,6 +5,11 @@
       <div v-for="tag in tags" :key="tag.id" class="tag">
         <span> {{ tag.tags_id.tag }}</span>
       </div>
+      <div v-if="authStore.isLoggedIn" class="admin-tasks">
+        <NuxtLink :to="'/profile/games/edit/' + this.id"
+          ><Btn>Edit Game</Btn></NuxtLink
+        >
+      </div>
     </div>
     <div class="game-title-image">
       <img
@@ -57,6 +62,8 @@
 </template>
 
 <script>
+import { useAuthStore } from '~/stores/auth.js';
+
 export default {
   name: 'Game',
   data() {
@@ -70,6 +77,7 @@ export default {
         comment: '',
       },
       tags: [],
+      authStore: useAuthStore(),
     };
   },
   mounted() {
@@ -205,6 +213,8 @@ h2 {
   padding: 0.5rem 0;
   margin-bottom: 1.5rem;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .tag {
