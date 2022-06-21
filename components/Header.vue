@@ -99,7 +99,6 @@ export default {
 
 <style lang="scss">
 .header-container {
-  // padding: 0.25rem 0;
   padding: 12px 0 12px 16px;
   display: flex;
   justify-content: space-between;

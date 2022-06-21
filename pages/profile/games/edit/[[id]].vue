@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     fetchGame() {
+      document.getElementById('loader').classList.add('loader');
       return fetch(
         `https://margot.fullstacksyntra.be/items/games/${this.gameId}`,
         {
@@ -47,6 +48,9 @@ export default {
         })
         .catch((err) => {
           console.error(err);
+        })
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
         });
     },
   },

@@ -35,9 +35,6 @@ export default {
   width: 100%;
 
   &__container {
-    // display: grid;
-    // grid-template-columns: repeat(2, 1fr);
-    // gap: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -27,9 +27,7 @@
     <div class="comments">
       <h2>Comments</h2>
       <div class="comments-container" v-for="comment in comments">
-        <!-- <div class="comment-image">Image</div> -->
         <div class="comment-info">
-          <!-- <span class="comment-username">Username</span> -->
           <span>{{ comment.comment }}</span>
         </div>
       </div>
@@ -73,6 +71,7 @@ export default {
   },
   methods: {
     init() {
+      document.getElementById('loader').classList.add('loader');
       fetch(
         `https://margot.fullstacksyntra.be/items/games/${this.id}?fields=*,comments.*`,
         {
@@ -94,9 +93,13 @@ export default {
         })
         .catch((err) => {
           console.error(err);
+        })
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
         });
     },
     uploadComment(addComment) {
+      document.getElementById('loader').classList.add('loader');
       console.log(addComment);
       const options = {
         method: 'POST',
@@ -116,7 +119,10 @@ export default {
 
           console.log(body);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
+        });
     },
   },
 };
@@ -154,8 +160,6 @@ h2 {
 }
 
 .comments-container {
-  // display: grid;
-  // grid-template-columns: 20% 80%;
   margin-bottom: 2rem;
   border: 5px solid rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
@@ -163,20 +167,6 @@ h2 {
   width: 50%;
   padding: 1.5rem;
 }
-
-// .comment-image {
-//   text-align: center;
-// }
-
-// .comment-info {
-//   display: flex;
-//   flex-direction: column;
-// }
-
-// .comment-username {
-//   margin-top: 0;
-//   text-align: center;
-// }
 
 .game-title-image {
   display: flex;

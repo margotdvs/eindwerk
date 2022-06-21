@@ -23,6 +23,8 @@ export default {
   },
   methods: {
     init() {
+      document.getElementById('loader').classList.add('loader');
+
       fetch('https://margot.fullstacksyntra.be/items/tags', {
         method: 'GET',
         headers: {},
@@ -39,6 +41,9 @@ export default {
         })
         .catch((err) => {
           console.error(err);
+        })
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
         });
     },
   },
@@ -69,17 +74,11 @@ export default {
   justify-content: flex-end;
   padding-bottom: 0;
   padding: 0.5rem;
-  // height: 250px;
-  // background-image: url(/assets/images/images/gaming.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
-  // h2 {
-  //   margin: 1rem 0;
-  //   padding-bottom: 1rem;
-  // }
 }
+
 a {
   text-decoration: none;
   color: white;

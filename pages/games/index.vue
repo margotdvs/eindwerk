@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     init() {
+      document.getElementById('loader').classList.add('loader');
       let params = new URLSearchParams();
 
       params.append('limit', this.limit);
@@ -61,7 +62,7 @@ export default {
         'https://margot.fullstacksyntra.be/items/games?' + params.toString(),
         {
           method: 'GET',
-          headers: {},
+          headers: { 'Content-Type': 'application/json' },
         },
       )
         .then((response) => {
@@ -79,10 +80,10 @@ export default {
         })
         .catch((err) => {
           console.error(err);
+        })
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
         });
-      // .finally(() => {
-      //   document.body.classList.remove('loading');
-      // });
     },
     calculatePages() {
       this.totalPages = Math.ceil(this.totalItems / this.limit);

@@ -90,6 +90,8 @@ export default {
   methods: {
     ...mapActions(useAuthStore, ['logout']),
     uploadFile(file) {
+      document.getElementById('loader').classList.add('loader');
+
       if (!file) {
         return Promise.resolve(null);
       }
@@ -117,9 +119,14 @@ export default {
         })
         .then((body) => {
           return body.data.id;
+        })
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
         });
     },
     save(data) {
+      document.getElementById('loader').classList.add('loader');
+
       this.uploadFile(data.title_image[0])
         .then((fileId) => {
           data.title_image = fileId;
@@ -160,6 +167,9 @@ export default {
             this.logout();
           }
           console.error(err);
+        })
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
         });
     },
   },

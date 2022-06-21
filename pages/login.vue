@@ -55,6 +55,7 @@ export default {
   methods: {
     ...mapActions(useNotificationsStore, ['addError', 'addMessage']),
     login(data) {
+      document.getElementById('loader').classList.add('loader');
       fetch('https://margot.fullstacksyntra.be/auth/login', {
         method: 'POST',
         headers: {
@@ -80,6 +81,9 @@ export default {
           console.error(err);
           this.addError('Could not login, check email and password');
           this.authStore.logout();
+        })
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
         });
     },
   },

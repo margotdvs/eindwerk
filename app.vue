@@ -3,6 +3,7 @@
     <NuxtPage />
     <Notifier />
   </NuxtLayout>
+  <span id="loader"></span>
 </template>
 
 <script>
