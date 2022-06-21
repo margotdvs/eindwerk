@@ -201,13 +201,20 @@ h2 {
   flex-direction: column;
 
   img {
-    width: 100%;
+    width: 75%;
     border-radius: 25px;
   }
 
   span {
     line-height: 1.5rem;
     text-align: justify;
+  }
+}
+
+.game-review:nth-of-type(even) {
+  .game-review-image {
+    display: flex;
+    justify-content: flex-end;
   }
 }
 

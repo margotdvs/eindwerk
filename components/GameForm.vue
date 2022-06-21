@@ -170,6 +170,7 @@ export default {
         })
         .finally(() => {
           document.getElementById('loader').classList.remove('loader');
+          this.$router.push('/games/' + this.$route.params.id);
         });
     },
   },
