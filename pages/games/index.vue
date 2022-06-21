@@ -231,5 +231,9 @@ h1 {
   display: flex;
   justify-content: center;
   margin-top: 5rem;
+
+  &-btn {
+    margin: 0 0.5rem;
+  }
 }
 </style>
