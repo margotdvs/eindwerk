@@ -13,12 +13,23 @@
             src="https://64.media.tumblr.com/28f43a715547490b90bfdd1f082e4a96/tumblr_nwtvr53yWg1up7w6go2_500.jpg"
           />
         </div>
-        <span
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-          necessitatibus, ea deleniti recusandae cum aut repellendus fugiat
-          dolore doloremque non quis. Laborum possimus a eius mollitia,
-          aspernatur minima officiis cumque.</span
-        >
+        <p>
+          Gamerviews is a wesbite with reviews written by gamers for gamers.
+        </p>
+        <p>
+          We know how important a good review is. After all, you don't want to
+          spend a lot of money on a game you're never really going to play
+          because it simply sucks.
+        </p>
+        <p>
+          That's why we invented this website. So that you, as a gamer, can rely
+          on an honest review and decide for yourself if it will be worth your
+          money and time.
+        </p>
+        <p>
+          Hope you enjoy the time on our website and remember:
+          <span>No lollygaggin!</span>
+        </p>
       </div>
       <div class="contact-right">
         <h3>Give us your feedback!</h3>
@@ -51,10 +62,18 @@ export default {
     margin-bottom: 1rem;
 
     img {
-      width: 50%;
-      margin-right: 0.5rem;
+      width: 49%;
+      margin-right: 0.55rem;
       border-radius: 25px;
     }
+  }
+  span {
+    font-weight: 700;
+    font-size: 19px;
+  }
+
+  p {
+    margin: 1.5rem 0;
   }
 }
 
