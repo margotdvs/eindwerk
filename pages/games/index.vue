@@ -23,10 +23,16 @@
         </NuxtLink>
       </OverviewCard>
     </div>
-    <div class="pagination">
-      <Btn @click="prevBtnClicked">Previous</Btn>
-      <Btn v-for="i in totalPages" :key="i" @click="pageClicked">{{ i }}</Btn>
-      <Btn @click="nextBtnClicked">Next</Btn>
+    <div id="pagination" class="pagination">
+      <Btn id="prev" @click="prevBtnClicked">Previous</Btn>
+      <Btn
+        :class="'pagination-btn'"
+        v-for="i in totalPages"
+        :key="i"
+        @click="pageClicked"
+        >{{ i }}</Btn
+      >
+      <Btn id="next" @click="nextBtnClicked">Next</Btn>
     </div>
   </div>
 </template>
@@ -53,6 +59,7 @@ export default {
   methods: {
     init() {
       document.getElementById('loader').classList.add('loader');
+
       let params = new URLSearchParams();
 
       params.append('limit', this.limit);
@@ -75,8 +82,9 @@ export default {
         .then((body) => {
           this.games = body.data;
           this.totalItems = body.meta.total_count;
-          console.log(this.totalItems);
           this.calculatePages();
+          this.prevAndNextBtn();
+          console.log(this.curPage);
         })
         .catch((err) => {
           console.error(err);
@@ -91,18 +99,56 @@ export default {
     pageClicked(event) {
       let $target = event.target;
 
-      if ($target.matches('.btn')) {
-        this.curPage = $target.innerText;
-        this.init();
+      this.curPage = parseInt($target.innerText);
+      this.init();
+
+      const btns = document.getElementById('pagination').children;
+
+      for (let i = 0; i < btns.length; i++) {
+        btns[i].classList.remove('active');
       }
+      $target.classList.add('active');
     },
     nextBtnClicked() {
       this.curPage++;
       this.init();
+
+      const btn = document.getElementsByClassName('pagination-btn');
+
+      for (let i = 0; i < btn.length; i++) {
+        btn[i].classList.remove('active');
+
+        if (parseInt(btn[i].innerText) === this.curPage) {
+          btn[i].classList.add('active');
+        }
+      }
     },
     prevBtnClicked() {
       this.curPage--;
       this.init();
+
+      const btn = document.getElementsByClassName('pagination-btn');
+
+      for (let i = 0; i < btn.length; i++) {
+        btn[i].classList.remove('active');
+
+        if (parseInt(btn[i].innerText) === this.curPage) {
+          btn[i].classList.add('active');
+        }
+      }
+    },
+    prevAndNextBtn() {
+      if (this.curPage === 1) {
+        document.getElementById('prev').classList.add('inactive');
+      } else {
+        document.getElementById('prev').classList.remove('inactive');
+      }
+
+      if (this.curPage === this.totalPages) {
+        document.getElementById('next').classList.add('inactive');
+      } else {
+        document.getElementById('next').classList.remove('inactive');
+      }
     },
   },
 };
@@ -111,6 +157,12 @@ export default {
 <style lang="scss">
 .inactive {
   display: none;
+}
+
+.active {
+  background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+  box-shadow: 0px 3px 20px 0px black;
+  color: black;
 }
 
 h1 {
