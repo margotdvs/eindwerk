@@ -1,9 +1,11 @@
 <template>
   <div>
     <h1>{{ game.name }}</h1>
-    <div class="tag-container">
-      <div v-for="tag in tags" :key="tag.id" class="tag">
-        <span> {{ tag.tags_id.tag }}</span>
+    <div class="info-container">
+      <div class="tag-container">
+        <div v-for="tag in tags" :key="tag.id" class="tag">
+          <span> {{ tag.tags_id.tag }}</span>
+        </div>
       </div>
       <div v-if="authStore.isLoggedIn" class="admin-tasks">
         <NuxtLink :to="'/profile/games/edit/' + this.id"
@@ -209,12 +211,16 @@ h2 {
   }
 }
 
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .tag-container {
   padding: 0.5rem 0;
   margin-bottom: 1.5rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .tag {
