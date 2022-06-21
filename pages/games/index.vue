@@ -84,7 +84,13 @@ export default {
           this.totalItems = body.meta.total_count;
           this.calculatePages();
           this.prevAndNextBtn();
-          console.log(this.curPage);
+        })
+        .then(() => {
+          if (this.curPage === 1) {
+            document
+              .getElementById('pagination')
+              .children[1].classList.add('active');
+          }
         })
         .catch((err) => {
           console.error(err);
