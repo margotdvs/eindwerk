@@ -195,7 +195,7 @@ h1 {
   justify-content: center;
   margin-top: 5rem;
 
-  &-btn {
+  .btn {
     margin: 0 0.5rem;
   }
 }

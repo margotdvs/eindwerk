@@ -1,6 +1,10 @@
 <template>
   <div class="homepage-container">
-    <NuxtLink to="/games" v-for="tag in tags" :key="tag.id">
+    <NuxtLink
+      :to="'/games?tags=' + tag.id + '&' + 'page=1'"
+      v-for="tag in tags"
+      :key="tag.id"
+    >
       <OverviewCard :class="'homepage-card'">
         <h3>{{ tag.tag }}</h3>
       </OverviewCard>

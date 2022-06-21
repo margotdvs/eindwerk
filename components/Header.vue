@@ -88,12 +88,7 @@
             Add Game
           </NuxtLink>
         </li>
-        <NuxtLink
-          :class="'navitem-dropdown'"
-          @click="logout"
-          @click.native="menuOpen = !menuOpen"
-          >Logout</NuxtLink
-        >
+        <NuxtLink :class="'navitem-dropdown'" @click="logout">Logout</NuxtLink>
       </div>
     </ul>
   </div>
