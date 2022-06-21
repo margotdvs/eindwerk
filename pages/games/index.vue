@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       games: [],
-      limit: 9,
+      limit: 8,
       totalItems: 0,
     };
   },
@@ -128,10 +128,6 @@ export default {
 </script>
 
 <style lang="scss">
-.inactive {
-  display: none;
-}
-
 .active {
   background: linear-gradient(to bottom, #e8edec, #d2d1d3);
   box-shadow: 0px 3px 20px 0px black;
@@ -149,7 +145,7 @@ h1 {
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   gap: 2rem 1rem;
 

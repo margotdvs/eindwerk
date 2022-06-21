@@ -41,7 +41,7 @@ export default {
   }
 
   &.active {
-    color: indianred;
+    color: black;
   }
 }
 </style>

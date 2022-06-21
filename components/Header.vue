@@ -28,51 +28,73 @@
   </div>
   <div class="dropdown" :class="{ 'dropdown-after': menuOpen }">
     <ul class="navlist">
-      <li class="navlistitem">
+      <div class="navlistitem">
+        <li>
+          <NuxtLink
+            :class="'navitem-dropdown'"
+            to="/"
+            @click="menuOpen = !menuOpen"
+          >
+            Home
+          </NuxtLink>
+        </li>
+
+        <li>
+          <NuxtLink
+            :class="'navitem-dropdown'"
+            to="/games"
+            @click="menuOpen = !menuOpen"
+          >
+            Games
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            :class="'navitem-dropdown'"
+            to="/contact"
+            @click="menuOpen = !menuOpen"
+          >
+            Contact
+          </NuxtLink>
+        </li>
+      </div>
+      <div v-if="!authStore.isLoggedIn" class="navlistitem">
+        <li>
+          <NuxtLink
+            :class="'navitem-dropdown'"
+            to="/login"
+            @click="menuOpen = !menuOpen"
+          >
+            Login
+          </NuxtLink>
+        </li>
+      </div>
+      <div v-else class="navlistitem">
+        <li>
+          <NuxtLink
+            :class="'navitem-dropdown'"
+            to="/profile"
+            @click="menuOpen = !menuOpen"
+          >
+            Profile
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink
+            :class="'navitem-dropdown'"
+            to="/games/add"
+            @click="menuOpen = !menuOpen"
+          >
+            Add Game
+          </NuxtLink>
+        </li>
         <NuxtLink
           :class="'navitem-dropdown'"
-          to="/"
-          @click="menuOpen = !menuOpen"
+          @click="logout"
+          @click.native="menuOpen = !menuOpen"
+          >Logout</NuxtLink
         >
-          Home
-        </NuxtLink>
-      </li>
-      <li class="navlistitem">
-        <NuxtLink
-          :class="'navitem-dropdown'"
-          to="/games"
-          @click="menuOpen = !menuOpen"
-        >
-          Games
-        </NuxtLink>
-      </li>
-      <li class="navlistitem">
-        <NuxtLink
-          :class="'navitem-dropdown'"
-          to="/contact"
-          @click="menuOpen = !menuOpen"
-        >
-          Contact
-        </NuxtLink>
-      </li>
-      <li v-if="!authStore.isLoggedIn" class="navlistitem">
-        <NuxtLink
-          :class="'navitem-dropdown'"
-          to="/login"
-          @click="menuOpen = !menuOpen"
-        >
-          Login
-        </NuxtLink>
-      </li>
-      <li v-else class="navlistitem">
-        <NuxtLink
-          :class="'navitem-dropdown'"
-          to="/profile"
-          @click="menuOpen = !menuOpen"
-        >
-          Profile
-        </NuxtLink>
-      </li>
+      </div>
     </ul>
   </div>
 </template>
@@ -185,9 +207,6 @@ export default {
   margin-top: -20px;
   height: 0px;
   transition: height 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 
@@ -198,6 +217,7 @@ export default {
 
 .navlist {
   list-style: none;
+  padding-left: 0;
 }
 
 .navlistitem {
@@ -205,7 +225,11 @@ export default {
   padding: 1rem 0;
 
   &:last-of-type {
-    padding: 5rem 0;
+    padding-top: 10rem;
+  }
+
+  li {
+    margin: 1.5rem 0;
   }
 }
 
