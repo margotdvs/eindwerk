@@ -8,7 +8,7 @@
       <OverviewCard v-for="game in games" :key="game.id">
         <div class="card-image">
           <img
-            v-bind:src="
+            :src="
               'https://margot.fullstacksyntra.be/assets/' + game.title_image
             "
           />
@@ -23,53 +23,82 @@
         </NuxtLink>
       </OverviewCard>
     </div>
-    <div id="pagination" class="pagination">
-      <Btn id="prev" @click="prevBtnClicked">Previous</Btn>
-      <Btn
-        :class="'pagination-btn'"
-        v-for="i in totalPages"
-        :key="i"
-        @click="pageClicked"
-        >{{ i }}</Btn
-      >
-      <Btn id="next" @click="nextBtnClicked">Next</Btn>
-    </div>
+    <Pagination :total-items="totalItems" :limit="limit" />
   </div>
 </template>
 
 <script>
-import OverviewCard from '~~/components/OverviewCard.vue';
-import Filter from '~~/components/Filter.vue';
+import OverviewCard from '~/components/OverviewCard.vue';
+import Filter from '~/components/Filter.vue';
+import Pagination from '~/components/Pagination.vue';
 
 export default {
-  components: { OverviewCard, Filter },
   name: 'Games',
+  components: { Pagination, OverviewCard, Filter },
   data() {
     return {
       games: [],
+      limit: 9,
       totalItems: 0,
-      limit: 8,
-      totalPages: 0,
-      curPage: 1,
     };
+  },
+  watch: {
+    $route: {
+      handler(newRoute, oldRoute) {
+        if (JSON.stringify(newRoute.query) === JSON.stringify(oldRoute.query)) {
+          return;
+        }
+
+        return this.fetchGames();
+      },
+      deep: true,
+    },
   },
   mounted() {
     this.init();
   },
   methods: {
-    init() {
+    genQuery() {
+      const urlSearchParams = new URLSearchParams();
+
+      if (
+        this.$route.query.release_year &&
+        this.$route.query.release_year.length > 0
+      ) {
+        urlSearchParams.append(
+          'filter[release_year][_in]',
+          this.$route.query.release_year,
+        );
+      }
+
+      if (this.$route.query.tags && this.$route.query.tags.length > 0) {
+        urlSearchParams.append(
+          'filter[tags][tags_id][_in]',
+          this.$route.query.tags,
+        );
+      }
+
+      if (this.$route.query.score && this.$route.query.score.length > 0) {
+        urlSearchParams.append('filter[score][_in]', this.$route.query.score);
+      }
+
+      urlSearchParams.append('limit', this.limit);
+      urlSearchParams.append('meta', 'filter_count');
+
+      if (this.$route.query.page) {
+        urlSearchParams.append('page', this.$route.query.page);
+      }
+
+      return urlSearchParams.toString();
+    },
+    fetchGames() {
       document.getElementById('loader').classList.add('loader');
 
-      let params = new URLSearchParams();
-
-      params.append('limit', this.limit);
-      params.append('page', this.curPage);
-      params.append('meta', 'total_count');
-      fetch(
-        'https://margot.fullstacksyntra.be/items/games?' + params.toString(),
+      return fetch(
+        'https://margot.fullstacksyntra.be/items/games?' + this.genQuery(),
         {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {},
         },
       )
         .then((response) => {
@@ -81,16 +110,8 @@ export default {
         })
         .then((body) => {
           this.games = body.data;
-          this.totalItems = body.meta.total_count;
-          this.calculatePages();
-          this.prevAndNextBtn();
-        })
-        .then(() => {
-          if (this.curPage === 1) {
-            document
-              .getElementById('pagination')
-              .children[1].classList.add('active');
-          }
+          this.totalItems = body.meta.filter_count;
+          return body.data;
         })
         .catch((err) => {
           console.error(err);
@@ -99,62 +120,8 @@ export default {
           document.getElementById('loader').classList.remove('loader');
         });
     },
-    calculatePages() {
-      this.totalPages = Math.ceil(this.totalItems / this.limit);
-    },
-    pageClicked(event) {
-      let $target = event.target;
-
-      this.curPage = parseInt($target.innerText);
-      this.init();
-
-      const btns = document.getElementById('pagination').children;
-
-      for (let i = 0; i < btns.length; i++) {
-        btns[i].classList.remove('active');
-      }
-      $target.classList.add('active');
-    },
-    nextBtnClicked() {
-      this.curPage++;
-      this.init();
-
-      const btn = document.getElementsByClassName('pagination-btn');
-
-      for (let i = 0; i < btn.length; i++) {
-        btn[i].classList.remove('active');
-
-        if (parseInt(btn[i].innerText) === this.curPage) {
-          btn[i].classList.add('active');
-        }
-      }
-    },
-    prevBtnClicked() {
-      this.curPage--;
-      this.init();
-
-      const btn = document.getElementsByClassName('pagination-btn');
-
-      for (let i = 0; i < btn.length; i++) {
-        btn[i].classList.remove('active');
-
-        if (parseInt(btn[i].innerText) === this.curPage) {
-          btn[i].classList.add('active');
-        }
-      }
-    },
-    prevAndNextBtn() {
-      if (this.curPage === 1) {
-        document.getElementById('prev').classList.add('inactive');
-      } else {
-        document.getElementById('prev').classList.remove('inactive');
-      }
-
-      if (this.curPage === this.totalPages) {
-        document.getElementById('next').classList.add('inactive');
-      } else {
-        document.getElementById('next').classList.remove('inactive');
-      }
+    init() {
+      this.fetchGames();
     },
   },
 };
@@ -182,7 +149,7 @@ h1 {
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 2rem 1rem;
 

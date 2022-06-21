@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "Btn",
+  name: 'Btn',
 };
 </script>
 
@@ -21,7 +21,7 @@ export default {
   border-radius: 25px;
   white-space: nowrap;
   &::before {
-    content: " ";
+    content: ' ';
     position: absolute;
     top: 0;
     left: 0;
@@ -34,10 +34,14 @@ export default {
   &:hover {
     &::before {
       background: linear-gradient(to bottom, #e8edec, #d2d1d3);
-      box-shadow: 0px 3px 20px 0px black;
+      box-shadow: 0 3px 20px 0 black;
       transform: scale(1.2);
     }
     color: black;
+  }
+
+  &.active {
+    color: indianred;
   }
 }
 </style>
