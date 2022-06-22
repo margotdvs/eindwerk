@@ -1,9 +1,7 @@
 <template>
   <div class="games-overview">
     <h1>Games Overview</h1>
-    <div class="filters-container">
-      <Filter />
-    </div>
+    <Filter />
     <div class="cards-container">
       <OverviewCard v-for="game in games" :key="game.id">
         <div class="card-image">
@@ -140,10 +138,6 @@ export default {
     justify-content: center;
     align-items: center;
   }
-}
-
-.filters-container {
-  margin-bottom: 3rem;
 }
 
 .cards-container {
