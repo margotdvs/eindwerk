@@ -61,9 +61,14 @@ export default {
   border-radius: 50%;
   height: 12rem;
   width: 12rem;
-  border: 1px solid white;
+  border: 1px solid $white;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and(max-width: 500px) {
+    height: 10rem;
+    width: 10rem;
+  }
 }
 </style>

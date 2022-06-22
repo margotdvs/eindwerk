@@ -143,9 +143,22 @@ export default {
   grid-template-rows: auto;
   gap: 2rem 1rem;
 
+  @media screen and (max-width: 1050px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   @media screen and (max-width: 800px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    width: 21rem;
   }
 }
 
