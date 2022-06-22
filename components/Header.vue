@@ -173,7 +173,7 @@ export default {
   display: flex;
   align-items: center;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 900px) {
     display: none;
   }
 }
@@ -235,8 +235,12 @@ export default {
   justify-content: space-between;
   align-items: center;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 900px) {
     display: none;
+  }
+
+  @media screen and(max-width: 1000px) {
+    width: 100%;
   }
 }
 </style>
