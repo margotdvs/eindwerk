@@ -7,12 +7,12 @@
         class="index-image"
       />
       <div class="index-page__description">
-        <span class="index-description"
-          >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime nemo
-          odio harum a, illo numquam eligendi magnam perferendis amet in
-          facilis! Laboriosam quisquam dicta modi nesciunt ut a explicabo
-          maxime!</span
-        >
+        <span class="index-description">A website by gamers for gamers!</span>
+        <span class="index-description">
+          The ultimate place for reading honest reviews, exploring (new) games
+          and even giving your own opinion on games. Everything, except for
+          lollygaggin, <span>NO LOLLYGAGGIN! ⚔️</span>
+        </span>
       </div>
       <img
         src="https://64.media.tumblr.com/01e3750e84d7eccd685c74938a5405eb/tumblr_pprgd2Oz7f1tw2hyao2_400.gifv"
@@ -63,6 +63,12 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 50%;
+  width: 70%;
+  font-weight: 700;
+
+  span {
+    margin: 0;
+    font-size: 18px;
+  }
 }
 </style>
