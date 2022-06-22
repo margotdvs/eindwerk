@@ -90,46 +90,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.formkit-inner {
-  @include background;
-  width: 100%;
-  padding: 0.5rem;
-  box-shadow: none;
-
-  &:focus-within {
-    border: none;
-    box-shadow: none;
-  }
-
-  &.no-background {
-    background-color: transparent;
-    display: block;
-    padding: 0;
-  }
-}
-
-.formkit-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.formkit-label {
-  font-family: $font-family;
-}
-
-.formkit-outer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.formkit-wrapper {
-  width: 100%;
-}
-</style>
+<style lang="scss"></style>
