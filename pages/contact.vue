@@ -53,7 +53,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  padding-top: 6rem;
+  padding-top: 4rem;
 }
 
 .contact-left {

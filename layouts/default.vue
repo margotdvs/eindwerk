@@ -1,16 +1,8 @@
 <template>
   <div class="hero">
-    <header>
-      <Header />
-    </header>
-
     <main>
       <slot />
     </main>
-
-    <footer>
-      <Footer />
-    </footer>
   </div>
 </template>
 
@@ -22,13 +14,14 @@ export default {
 
 <style lang="scss">
 .hero {
+  height: 100%;
   max-width: 1200px;
   padding: 0 2rem;
-  height: 100%;
 }
 
-// footer {
-//   position: absolute;
-//   bottom: 0;
-// }
+main {
+  position: relative;
+  min-height: 85vh;
+  width: 100%;
+}
 </style>

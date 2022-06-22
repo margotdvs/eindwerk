@@ -35,9 +35,10 @@ export default {
 
 <style>
 .footer-container {
-  padding: 4rem 0 0;
+  padding: 1rem 0;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .footer-left {

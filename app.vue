@@ -1,7 +1,9 @@
 <template>
   <NuxtLayout name="default" class="default">
+    <Header class="header" />
     <NuxtPage />
     <Notifier />
+    <Footer class="footer" />
   </NuxtLayout>
   <span id="loader"></span>
 </template>
@@ -34,7 +36,26 @@ export default {
 </script>
 <style lang="scss">
 .default {
-  width: 100vw;
+  width: 100%;
+  min-height: 100%;
+}
+
+#__nuxt {
   height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  top: 0;
+  position: absolute;
+}
+
+.footer {
+  position: absolute;
+  bottom: -8rem;
 }
 </style>
