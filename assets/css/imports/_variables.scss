@@ -1,7 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;600;700&display=swap');
 
-$green: green;
-$gold: goldenrod;
 $font-family: 'Radio Canada', sans-serif;
-$blue-light: #56ccf2;
 $blue-dark: #2f80ed;
+$white: white;
+$black: black;
+
+$transparent: transparent;
+$border-radius: 25px;
+
+@mixin border {
+  border: 5px solid rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+}
+
+@mixin background {
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+@mixin background-btn {
+  background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+  box-shadow: 0px 3px 20px 0px black;
+  transform: scale(1.2);
+}

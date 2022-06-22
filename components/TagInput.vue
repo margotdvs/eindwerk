@@ -226,9 +226,7 @@ export default {
   }
 
   &__item {
-    border-radius: 25px;
-    background-color: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
+    @include background;
     padding: 0.5rem;
     box-shadow: none;
     border: none;
@@ -242,11 +240,9 @@ export default {
 
   &__add-btn,
   &__save-btn {
+    @include background;
     margin-top: 0.5rem;
     display: block;
-    border-radius: 25px;
-    background-color: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
     padding: 0.5rem;
     box-shadow: none;
     border: none;
@@ -256,9 +252,7 @@ export default {
 
   &__input {
     &-container {
-      border-radius: 25px;
-      background-color: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
+      @include background;
     }
 
     &-field {
@@ -268,7 +262,7 @@ export default {
       border: none;
       outline: none;
       padding: 0.5rem 1rem;
-      background-color: transparent;
+      background-color: $transparent;
     }
 
     &-options {
@@ -277,7 +271,7 @@ export default {
     }
 
     &-option {
-      background-color: transparent;
+      background-color: $transparent;
       border: none;
       outline: none;
       padding: 0.5rem;

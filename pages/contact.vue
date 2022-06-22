@@ -64,7 +64,7 @@ export default {
     img {
       width: 49%;
       margin-right: 0.55rem;
-      border-radius: 25px;
+      border-radius: $border-radius;
     }
   }
   span {

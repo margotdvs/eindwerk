@@ -92,10 +92,8 @@ export default {
 
 <style lang="scss">
 .formkit-inner {
+  @include background;
   width: 100%;
-  border-radius: 25px;
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
   padding: 0.5rem;
   box-shadow: none;
 

@@ -10,15 +10,15 @@ export default {
 
 <style lang="scss">
 .btn {
-  border: transparent;
-  color: white;
-  background-color: transparent;
+  border: $transparent;
+  color: $white;
+  background-color: $transparent;
   font-weight: 700;
   font-size: 16px;
   padding: 12px 16px;
   position: relative;
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: $border-radius;
   white-space: nowrap;
   &::before {
     content: ' ';
@@ -29,19 +29,17 @@ export default {
     width: 100%;
     z-index: -1;
     transition: 0.2s;
-    border-radius: 25px;
+    border-radius: $border-radius;
   }
   &:hover {
     &::before {
-      background: linear-gradient(to bottom, #e8edec, #d2d1d3);
-      box-shadow: 0 3px 20px 0 black;
-      transform: scale(1.2);
+      @include background-btn;
     }
-    color: black;
+    color: $black;
   }
 
   &.active {
-    color: black;
+    color: $black;
   }
 }
 </style>

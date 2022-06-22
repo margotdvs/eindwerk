@@ -129,13 +129,13 @@ export default {
 
 .logo {
   padding: 0 2rem;
-  color: white;
+  color: $white;
 }
 
 .nav {
   &-item {
     text-decoration: none;
-    color: white;
+    color: $white;
     font-weight: 700;
     padding: 12px 16px;
     margin: 0 8px;
@@ -155,11 +155,9 @@ export default {
     }
     &:hover {
       &::before {
-        background: linear-gradient(to bottom, #e8edec, #d2d1d3);
-        box-shadow: 0px 3px 20px 0px black;
-        transform: scale(1.2);
+        @include background-btn;
       }
-      color: black;
+      color: $black;
     }
   }
 }
@@ -167,8 +165,8 @@ export default {
 .hamburger {
   width: 45px;
   height: 45px;
-  background-color: transparent;
-  border: transparent;
+  background-color: $transparent;
+  border: $transparent;
   margin-right: 32px;
   cursor: pointer;
 }
@@ -188,7 +186,7 @@ export default {
   width: 30px;
   height: 2px;
   border-radius: 2px;
-  background-color: white;
+  background-color: $white;
   margin-top: 7px;
   margin-bottom: 7px;
 }
@@ -230,7 +228,7 @@ export default {
 
 .navitem-dropdown {
   text-decoration: none;
-  color: white;
+  color: $white;
 }
 
 .row-nav {

@@ -161,15 +161,13 @@ export default {
 
 <style lang="scss">
 .dropdown-filter {
-  border-radius: 25px;
-  border: transparent;
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  @include background;
+  border: $transparent;
   padding: 1rem;
   font-family: $font-family;
   font-weight: 700;
   font-size: 16px;
-  color: white;
+  color: $white;
 }
 
 .c-filters {
@@ -188,19 +186,17 @@ export default {
     }
 
     &-fieldset {
-      border-radius: 25px;
-      border: transparent;
-      background-color: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
+      @include background;
+      border: $transparent;
       padding: 3.5rem 1.5rem 1.5rem;
       font-family: $font-family;
       font-weight: 700;
       font-size: 20px;
-      color: white;
+      color: $white;
       position: relative;
       overflow: auto;
       height: 100%;
-      scrollbar-color: #999 transparent;
+      scrollbar-color: #999 $transparent;
 
       &::-webkit-scrollbar {
         width: 10px; /* Mostly for vertical scrollbars */
@@ -212,7 +208,7 @@ export default {
       }
       &::-webkit-scrollbar-track {
         /* Background */
-        background: transparent;
+        background: $transparent;
       }
     }
 

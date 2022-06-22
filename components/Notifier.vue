@@ -52,7 +52,7 @@ export default {
 
     &--error {
       background-color: red;
-      color: white;
+      color: $white;
     }
 
     &--message {
@@ -68,8 +68,8 @@ export default {
       top: 0.5rem;
       right: 0.5rem;
       font-family: monospace;
-      color: transparent;
-      background-color: black;
+      color: $transparent;
+      background-color: $black;
       border: none;
       border-radius: 0.6rem;
       display: block;
@@ -89,7 +89,7 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(45deg);
-        background-color: white;
+        background-color: $white;
       }
 
       &:after {

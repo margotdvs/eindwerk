@@ -50,7 +50,7 @@ export default {
 }
 
 .index-image {
-  border-radius: 25px;
+  border-radius: $border-radius;
 }
 
 .index-description {
@@ -58,7 +58,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  line-height: 1.5rem;
   text-align: center;
   width: 50%;
 }

@@ -138,7 +138,7 @@ export default {
       position: absolute;
       top: 0.5rem;
       right: 0.5rem;
-      color: transparent;
+      color: $transparent;
       width: 1rem;
       height: 1rem;
       border-radius: 0.5rem;

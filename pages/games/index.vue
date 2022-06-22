@@ -129,14 +129,8 @@ export default {
 
 <style lang="scss">
 .active {
-  background: linear-gradient(to bottom, #e8edec, #d2d1d3);
-  box-shadow: 0px 3px 20px 0px black;
-  color: black;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 3rem;
+  @include background-btn;
+  color: $black;
 }
 
 .filters-container {
@@ -161,8 +155,8 @@ h1 {
   img {
     width: 100%;
     height: 100%;
-    border-top-right-radius: 25px;
-    border-top-left-radius: 25px;
+    border-top-right-radius: $border-radius;
+    border-top-left-radius: $border-radius;
   }
 }
 
@@ -174,7 +168,7 @@ h1 {
 }
 
 .card-score {
-  color: white;
+  color: $white;
   width: 100%;
   padding: 0 2rem;
   margin: 0;

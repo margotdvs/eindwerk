@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="game">
+    <NuxtLink to="./">
+      <Btn><span class="arrow">ᐸ</span> Back</Btn>
+    </NuxtLink>
     <h1>{{ game.name }}</h1>
     <div class="info-container">
       <div class="tag-container">
@@ -146,27 +149,51 @@ export default {
 </script>
 
 <style lang="scss">
-.game-description {
-  display: grid;
-  grid-template-columns: 70% 30%;
-  margin-bottom: 2rem;
-  line-height: 1.5rem;
-  text-align: justify;
-  margin-top: 1.5rem;
-}
+.game {
+  &-description {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    margin-bottom: 2rem;
+    line-height: 1.5rem;
+    text-align: justify;
+    margin-top: 1.5rem;
+  }
 
-.game-score {
-  font-weight: 700;
-  font-size: 21px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
+  &-score {
+    font-weight: 700;
+    font-size: 21px;
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
 
-h2 {
-  text-align: center;
-  margin-bottom: 3rem;
+  &-review {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      width: 75%;
+      border-radius: $border-radius;
+      margin-bottom: 1.5rem;
+    }
+
+    span {
+      line-height: 1.5rem;
+      text-align: justify;
+    }
+  }
+
+  &-title-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      border-radius: $border-radius;
+      width: 100%;
+    }
+  }
 }
 
 .comments {
@@ -174,40 +201,12 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
 
-.comments-container {
-  margin-bottom: 2rem;
-  border: 5px solid rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 25px;
-  width: 50%;
-  padding: 1.5rem;
-}
-
-.game-title-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    border-radius: 25px;
-    width: 100%;
-  }
-}
-
-.game-review {
-  display: flex;
-  flex-direction: column;
-
-  img {
-    width: 75%;
-    border-radius: 25px;
-  }
-
-  span {
-    line-height: 1.5rem;
-    text-align: justify;
+  &-container {
+    @include border;
+    margin-bottom: 2rem;
+    width: 50%;
+    padding: 1.5rem;
   }
 }
 
@@ -222,26 +221,29 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.tag-container {
-  padding: 0.5rem 0;
-  margin-bottom: 1.5rem;
-  display: flex;
+  margin-top: 1rem;
 }
 
 .tag {
-  border: 5px solid rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 25px;
+  @include border;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 6rem;
   margin: 0 0.5rem;
 
+  &-container {
+    padding: 0.5rem 0;
+    margin-bottom: 1.5rem;
+    display: flex;
+  }
+
   span {
     margin: 0.75rem 0;
   }
+}
+
+.arrow {
+  margin-right: 0.75rem;
 }
 </style>

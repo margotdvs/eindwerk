@@ -12,17 +12,11 @@ export default {
 
 <style lang="scss">
 .card-container {
-  border-radius: 25px;
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  @include background;
   padding-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-h3 {
-  text-align: center;
 }
 
 span {
