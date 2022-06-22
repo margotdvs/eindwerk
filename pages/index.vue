@@ -51,8 +51,6 @@ export default {
 
 .index-image {
   border-radius: 25px;
-  margin-right: 0.25rem;
-  height: 100%;
 }
 
 .index-description {
