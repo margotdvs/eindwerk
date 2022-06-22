@@ -11,9 +11,10 @@
         </div>
       </div>
       <div v-if="authStore.isLoggedIn" class="admin-tasks">
-        <NuxtLink :to="'/profile/games/edit/' + this.id"
-          ><Btn>Edit Game</Btn></NuxtLink
-        >
+        <NuxtLink :to="'/profile/games/edit/' + this.id">
+          <Btn> Edit Game </Btn>
+        </NuxtLink>
+        <Btn @click="deleteGame">Delete Game</Btn>
       </div>
     </div>
     <div class="game-title-image">
@@ -144,6 +145,21 @@ export default {
           document.getElementById('loader').classList.remove('loader');
         });
     },
+    deleteGame() {
+      const options = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: 'false',
+      };
+
+      fetch(`https://margot.fullstacksyntra.be/items/games/${this.id}`, options)
+        .then((response) => response.json())
+        .then((response) => console.log(response))
+        .catch((err) => console.error(err))
+        .finally(() => {
+          this.$router.push('/games');
+        });
+    },
   },
 };
 </script>
@@ -259,5 +275,11 @@ export default {
 
 .arrow {
   margin-right: 0.75rem;
+}
+
+.admin-tasks {
+  button {
+    margin-left: 1.5rem;
+  }
 }
 </style>
