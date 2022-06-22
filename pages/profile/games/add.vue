@@ -19,8 +19,8 @@ export default {
 </script>
 
 <style lang="scss">
-// .add-form {
-//   display: grid;
-//   grid-template-columns: repeat(2, 1fr);
-// }
+.add-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 </style>

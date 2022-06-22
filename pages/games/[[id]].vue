@@ -157,6 +157,12 @@ export default {
     line-height: 1.5rem;
     text-align: justify;
     margin-top: 1.5rem;
+
+    @media screen and(max-width: 600px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   &-score {
@@ -176,6 +182,10 @@ export default {
       width: 75%;
       border-radius: $border-radius;
       margin-bottom: 1.5rem;
+
+      @media screen and(max-width: 800px) {
+        width: 100%;
+      }
     }
 
     span {
@@ -205,8 +215,12 @@ export default {
   &-container {
     @include border;
     margin-bottom: 2rem;
-    width: 50%;
+    width: 60%;
     padding: 1.5rem;
+
+    @media screen and(max-width: 800px) {
+      width: 100%;
+    }
   }
 }
 
