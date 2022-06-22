@@ -116,14 +116,12 @@ export default {
 
 <style lang="scss">
 .header-container {
+  @include background;
   padding: 12px 0 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  border-radius: 25px;
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
   margin: 4rem 0;
 }
 

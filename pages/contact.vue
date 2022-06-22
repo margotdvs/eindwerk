@@ -14,7 +14,7 @@
           />
         </div>
         <p>
-          Gamerviews is a wesbite with reviews written by gamers for gamers.
+          Gamerviews is a website with reviews written by gamers for gamers.
         </p>
         <p>
           We know how important a good review is. After all, you don't want to
