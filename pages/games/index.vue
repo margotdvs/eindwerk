@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="games-overview">
     <h1>Games Overview</h1>
     <div class="filters-container">
       <Filter />
@@ -131,6 +131,15 @@ export default {
 .active {
   @include background-btn;
   color: $black;
+}
+
+.games-overview {
+  @media screen and(max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .filters-container {
