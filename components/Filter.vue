@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapState } from 'pinia';
+import { mapState, mapActions } from 'pinia';
 import { FormKit } from '@formkit/vue/index';
 import { useFiltersStore } from '~/stores/filters.js';
 
@@ -53,7 +53,6 @@ export default {
   components: { FormKit },
   data() {
     return {
-      filterStore: useFiltersStore(),
       selectedFilters: {
         tags: [],
         release_year: [],
@@ -86,7 +85,7 @@ export default {
       return tagOptions;
     },
     yearOptions() {
-      if (this.years.length === 0) {
+      if (Object.keys(this.years).length === 0) {
         if (this.yearsReady) {
           return { '': 'Could not find any years' };
         }
@@ -103,12 +102,13 @@ export default {
       return scoreOptions;
     },
   },
-  created() {
-    this.filterStore.init().then(() => {
+  mounted() {
+    this.init().then(() => {
       this.selectFiltersFromUrl();
     });
   },
   methods: {
+    ...mapActions(useFiltersStore, ['init']),
     selectFiltersFromUrl() {
       if (this.$route.query.release_year) {
         if (typeof this.$route.query.release_year === 'string') {

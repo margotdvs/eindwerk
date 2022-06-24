@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <div class="header-container" :class="classList">
     <div class="logo">Gamerviews</div>
     <div class="row-nav">
       <div class="nav">
@@ -99,6 +99,14 @@ import { useAuthStore } from '~/stores/auth.js';
 
 export default {
   name: 'Header',
+  props: {
+    classList: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
   data() {
     return {
       menuOpen: false,

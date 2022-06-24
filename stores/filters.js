@@ -22,7 +22,7 @@ export const useFiltersStore = defineStore('notifications', {
       }
 
       return fetch(
-        'https://margot.fullstacksyntra.be/items/games?fields=release_year&groupBy=release_year&sort=-release_year',
+        'https://margot.fullstacksyntra.be/items/games?fields=release_year&groupBy=release_year&filter%5Brelease_year%5D%5B_nnull%5D=true&sort=release_year',
         {
           method: 'GET',
           headers: {},

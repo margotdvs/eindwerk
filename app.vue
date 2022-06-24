@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="default" class="default">
-    <Header class="header" />
+    <Header />
     <NuxtPage />
     <Notifier />
     <Footer class="footer" />
