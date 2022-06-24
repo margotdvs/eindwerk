@@ -29,7 +29,7 @@
       <span class="game-score">Score {{ game.score }} / 10</span>
     </div>
 
-    <div v-for="item in review" :class="'game-review'">
+    <div v-for="item in review" :key="item.id" :class="'game-review'">
       <h3>{{ item.subtitle }}</h3>
 
       <div class="game-review-image">
@@ -42,7 +42,11 @@
 
     <div class="comments">
       <h2>Comments</h2>
-      <div class="comments-container" v-for="comment in comments">
+      <div
+        class="comments-container"
+        v-for="comment in comments"
+        :key="comment.id"
+      >
         <!-- <div v-if="authStore.isLoggedIn"></div> -->
         <div class="comment-info">
           <span>{{ comment.comment }}</span>
@@ -70,6 +74,7 @@
 
 <script>
 import { useAuthStore } from '~/stores/auth.js';
+import { mapState } from 'pinia';
 
 export default {
   name: 'Game',
@@ -89,6 +94,9 @@ export default {
   },
   mounted() {
     this.init();
+  },
+  computed: {
+    ...mapState(useAuthStore, ['accessToken']),
   },
   methods: {
     init() {
@@ -122,7 +130,6 @@ export default {
     },
     uploadComment(addComment) {
       document.getElementById('loader').classList.add('loader');
-      console.log(addComment);
       const options = {
         method: 'POST',
 
@@ -149,7 +156,10 @@ export default {
     deleteGame() {
       const options = {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.accessToken}`,
+        },
         body: 'false',
       };
 

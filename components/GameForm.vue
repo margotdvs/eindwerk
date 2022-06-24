@@ -32,6 +32,14 @@
       label="Tags"
     />
     <FormKit
+      type="number"
+      name="release_year"
+      label="release year"
+      min="1900"
+      max="2099"
+      validation="required"
+    />
+    <FormKit
       type="textarea"
       name="description_short"
       label="Short description"
@@ -75,6 +83,7 @@ export default {
           tags: [],
           description_short: '',
           review: [],
+          release_year: '',
         };
 
     return {
@@ -90,8 +99,6 @@ export default {
   methods: {
     ...mapActions(useAuthStore, ['logout']),
     uploadFile(file) {
-      // document.getElementById('loader').classList.add('loader');
-
       if (!file) {
         return Promise.resolve(null);
       }
@@ -120,9 +127,6 @@ export default {
         .then((body) => {
           return body.data.id;
         });
-      // .finally(() => {
-      //   document.getElementById('loader').classList.remove('loader');
-      // });
     },
     save(data) {
       document.getElementById('loader').classList.add('loader');
