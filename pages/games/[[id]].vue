@@ -43,6 +43,7 @@
     <div class="comments">
       <h2>Comments</h2>
       <div class="comments-container" v-for="comment in comments">
+        <!-- <div v-if="authStore.isLoggedIn"></div> -->
         <div class="comment-info">
           <span>{{ comment.comment }}</span>
         </div>
