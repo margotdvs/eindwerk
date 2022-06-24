@@ -157,14 +157,11 @@ export default {
       const options = {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${this.accessToken}`,
         },
-        body: 'false',
       };
 
       fetch(`https://margot.fullstacksyntra.be/items/games/${this.id}`, options)
-        .then((response) => response.json())
         .then((response) => console.log(response))
         .catch((err) => console.error(err))
         .finally(() => {
