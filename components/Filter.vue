@@ -60,6 +60,11 @@ export default {
       },
     };
   },
+  created() {
+    this.init().then(() => {
+      this.selectFiltersFromUrl();
+    });
+  },
   computed: {
     ...mapState(useFiltersStore, [
       'tags',
@@ -101,11 +106,6 @@ export default {
       }
       return scoreOptions;
     },
-  },
-  mounted() {
-    this.init().then(() => {
-      this.selectFiltersFromUrl();
-    });
   },
   methods: {
     ...mapActions(useFiltersStore, ['init']),

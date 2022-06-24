@@ -25,11 +25,11 @@
         label="Text"
       />
       <FormKit
+        v-model="review[index].image"
         :ignore="true"
-        type="file"
+        :type="imageInput"
         label="Image"
-        :data-index="index"
-        @change="uploadFile"
+        inner-class="no-background"
       />
     </div>
     <div class="c-review-input__btns">
@@ -40,7 +40,9 @@
 
 <script>
 import { mapState, mapActions } from 'pinia';
+import { createInput } from '@formkit/vue';
 import { useAuthStore } from '~/stores/auth.js';
+import ImageInput from '~/components/ImageInput.vue';
 
 export default {
   name: 'ReviewInput',
@@ -55,6 +57,7 @@ export default {
   data() {
     return {
       review: this.initData(),
+      imageInput: createInput(ImageInput),
     };
   },
   computed: {

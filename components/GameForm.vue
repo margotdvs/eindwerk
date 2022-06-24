@@ -1,5 +1,11 @@
 <template>
-  <FormKit v-model="data" type="form" submit-label="Save" @submit="save">
+  <FormKit
+    v-model="data"
+    type="form"
+    submit-label="Save"
+    :disable="isUploadingFile"
+    @submit="save"
+  >
     <FormKit
       type="select"
       label="Status"
@@ -12,10 +18,10 @@
     />
     <FormKit type="text" name="name" label="Game title" validation="required" />
     <FormKit
-      type="file"
+      inner-class="no-background"
+      :type="imageInput"
       name="title_image"
       label="Title image"
-      accept=".jpg, .jpeg, .png, .gif"
     />
     <FormKit
       type="number"
@@ -60,7 +66,9 @@ import { createInput } from '@formkit/vue';
 import { mapState, mapActions } from 'pinia';
 import TagInput from '~/components/TagInput.vue';
 import ReviewInput from '~/components/ReviewInput.vue';
+import ImageInput from '~/components/ImageInput.vue';
 import { useAuthStore } from '~/stores/auth.js';
+import { useNotificationsStore } from '~/stores/notifications.js';
 
 export default {
   name: 'GameForm',
@@ -73,81 +81,55 @@ export default {
     },
   },
   data() {
-    const gameData = this.gameData
-      ? this.gameData
-      : {
+    return {
+      tagInput: createInput(TagInput),
+      reviewInput: createInput(ReviewInput),
+      imageInput: createInput(ImageInput),
+      data: this.initData(),
+      isUploadingFile: false,
+    };
+  },
+  computed: {
+    ...mapState(useAuthStore, ['accessToken']),
+    edit() {
+      return !!this.gameData;
+    },
+  },
+  methods: {
+    ...mapActions(useNotificationsStore, ['addError', 'addMessage']),
+    ...mapActions(useAuthStore, ['logout']),
+    initData() {
+      if (!this.gameData) {
+        return {
           status: 'draft',
           name: '',
-          title_image: [],
+          title_image: '',
           score: '',
           tags: [],
           description_short: '',
           review: [],
           release_year: '',
         };
-
-    return {
-      tagInput: createInput(TagInput),
-      reviewInput: createInput(ReviewInput),
-      data: gameData,
-      edit: !!this.gameData,
-    };
-  },
-  computed: {
-    ...mapState(useAuthStore, ['accessToken']),
-  },
-  methods: {
-    ...mapActions(useAuthStore, ['logout']),
-    uploadFile(file) {
-      if (!file) {
-        return Promise.resolve(null);
       }
-      const body = new FormData();
-      body.append('title', file.name);
-      body.append('file', file.file);
 
-      return fetch('https://margot.fullstacksyntra.be/files', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${this.accessToken}`,
-        },
-        body,
-      })
-        .then((response) => {
-          if (response.status === 401) {
-            throw new Error('401');
-          }
-
-          if (!response.ok) {
-            throw new Error('Could not upload file');
-          }
-
-          return response.json();
-        })
-        .then((body) => {
-          return body.data.id;
-        });
+      return this.gameData;
     },
     save(data) {
       document.getElementById('loader').classList.add('loader');
 
-      this.uploadFile(data.title_image[0])
-        .then((fileId) => {
-          data.title_image = fileId;
-          return fetch(
-            `https://margot.fullstacksyntra.be/items/games${
-              this.edit ? '/' + this.gameData.id : ''
-            }`,
-            {
-              method: this.edit ? 'PATCH' : 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${this.accessToken}`,
-              },
-              body: JSON.stringify(data),
-            },
-          );
-        })
+      return fetch(
+        `https://margot.fullstacksyntra.be/items/games${
+          this.edit ? '/' + this.gameData.id : ''
+        }`,
+        {
+          method: this.edit ? 'PATCH' : 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+          body: JSON.stringify(data),
+        },
+      )
         .then((response) => {
           if (response.status === 401) {
             throw new Error('401');
@@ -170,6 +152,7 @@ export default {
           if (err.message === '401') {
             this.logout();
           }
+          this.addError('Could not save game, try again later?');
           console.error(err);
         })
         .finally(() => {
@@ -181,4 +164,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.image-preview {
+  padding-bottom: 1rem;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+</style>
