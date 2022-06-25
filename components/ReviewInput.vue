@@ -123,45 +123,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.c-review-input {
-  &__item {
-    position: relative;
-    border: 1px solid white;
-    border-radius: 1rem;
-    padding: 1rem;
-    margin: 1rem 0;
-
-    &-remove {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      color: $transparent;
-      width: 1rem;
-      height: 1rem;
-      border-radius: 0.5rem;
-      border: none;
-      outline: none;
-
-      &:before,
-      &:after {
-        display: block;
-        content: '';
-        width: 2px;
-        height: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-left: -1px;
-        margin-top: -5px;
-        background-color: $blue-dark;
-        transform: rotate(45deg);
-      }
-
-      &:after {
-        transform: rotate(-45deg);
-      }
-    }
-  }
-}
-</style>
+<style lang="scss"></style>
