@@ -17,9 +17,16 @@
             "
           />
         </div>
-        <div class="card-mid">
+        <div class="card-title">
           <h3>{{ game.name }}</h3>
           <span class="card-score">{{ game.score }} / 10</span>
+        </div>
+        <div class="card-tags">
+          <div v-for="tag in game.tags" :key="tag.tags_id" class="tag">
+            {{ tag.tags_id.tag }}
+          </div>
+        </div>
+        <div class="card-mid">
           <span class="card-description">{{ game.description_short }}</span>
         </div>
         <NuxtLink :to="'/games/' + game.id" :class="'card-bottom'">
@@ -42,7 +49,7 @@ export default {
   data() {
     return {
       games: [],
-      limit: 8,
+      limit: 9,
       totalItems: 0,
       menuOpen: false,
     };
@@ -93,6 +100,8 @@ export default {
       if (this.$route.query.page) {
         urlSearchParams.append('page', this.$route.query.page);
       }
+      urlSearchParams.append('fields', '*,tags.tags_id.tag');
+      urlSearchParams.append('sort', '-date_created');
 
       return urlSearchParams.toString();
     },
@@ -100,9 +109,7 @@ export default {
       document.getElementById('loader').classList.add('loader');
 
       return fetch(
-        'https://margot.fullstacksyntra.be/items/games?' +
-          this.genQuery() +
-          '&sort=-date_created',
+        'https://margot.fullstacksyntra.be/items/games?' + this.genQuery(),
         {
           method: 'GET',
           headers: {},
@@ -118,6 +125,7 @@ export default {
         .then((body) => {
           this.games = body.data;
           this.totalItems = body.meta.filter_count;
+          console.log(this.games);
           return body.data;
         })
         .catch((err) => {
@@ -151,16 +159,11 @@ export default {
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 2rem 1rem;
 
-  @media screen and (max-width: 1050px) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 900px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
@@ -168,20 +171,34 @@ export default {
   @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
     width: 21rem;
   }
 }
 
 .card-image {
   width: 100%;
-  height: 175px;
+  height: 200px;
   img {
     width: 100%;
     height: 100%;
     border-top-right-radius: $border-radius;
     border-top-left-radius: $border-radius;
+  }
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  h3 {
+    margin-left: 1.5rem;
+  }
+
+  span {
+    width: 4rem;
+    margin: 0 1.5rem 0 0;
   }
 }
 
@@ -194,10 +211,21 @@ export default {
 
 .card-score {
   color: $white;
-  width: 100%;
-  padding: 0 2rem;
   margin: 0;
   text-align: right;
+}
+
+.card-tags {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 5rem;
+
+  .tag {
+    margin: 0;
+    height: 2.5rem;
+  }
 }
 
 .card-description {
