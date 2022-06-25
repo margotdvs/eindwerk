@@ -93,7 +93,9 @@ export default {
       document.getElementById('loader').classList.add('loader');
 
       return fetch(
-        'https://margot.fullstacksyntra.be/items/games?' + this.genQuery(),
+        'https://margot.fullstacksyntra.be/items/games?' +
+          this.genQuery() +
+          '&sort=-date_created',
         {
           method: 'GET',
           headers: {},
