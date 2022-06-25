@@ -77,8 +77,6 @@ export default {
       return JSON.parse(JSON.stringify(this.context._value));
     },
     uploadFile(event) {
-      // document.getElementById('loader').classList.add('loader');
-
       const file = event.target.files[0];
       console.log(file);
       if (!file) {
@@ -110,9 +108,6 @@ export default {
           this.review[event.target.dataset.index].image = body.data.id;
           return body.data.id;
         });
-      // .finally(() => {
-      //   document.getElementById('loader').classList.remove('loader');
-      // });
     },
     addItem() {
       this.review.push({

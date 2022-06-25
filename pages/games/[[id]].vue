@@ -47,7 +47,15 @@
         v-for="comment in comments"
         :key="comment.id"
       >
-        <!-- <div v-if="authStore.isLoggedIn"></div> -->
+        <div v-if="authStore.isLoggedIn">
+          <button
+            type="button"
+            class="c-review-input__item-remove"
+            @click="deleteComment(comment.id)"
+          >
+            Delete
+          </button>
+        </div>
         <div class="comment-info">
           <span>{{ comment.comment }}</span>
         </div>
@@ -102,7 +110,7 @@ export default {
     init() {
       document.getElementById('loader').classList.add('loader');
       fetch(
-        `https://margot.fullstacksyntra.be/items/games/${this.id}?fields=*,comments.comment,*,tags.tags_id.tag`,
+        `https://margot.fullstacksyntra.be/items/games/${this.id}?fields=comments.comment,comments.id,*,tags.tags_id.tag`,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -120,6 +128,7 @@ export default {
           this.review = this.game.review;
           this.comments = this.game.comments;
           this.tags = this.game.tags;
+          console.log(this.game);
         })
         .catch((err) => {
           console.error(err);
@@ -167,11 +176,34 @@ export default {
           if (err.message === '401') {
             this.logout();
           }
-          this.addError('Could not delete game, try again later?');
+          this.addError('Could not delete game try again later?');
           console.error(err);
         })
         .finally(() => {
           this.$router.push('/games');
+        });
+    },
+    deleteComment(index) {
+      const options = {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`,
+        },
+      };
+      fetch(
+        `https://margot.fullstacksyntra.be/items/comments/${index}`,
+        options,
+      )
+        .then((response) => console.log(response))
+        .catch((err) => {
+          if (err.message === '401') {
+            this.logout();
+          }
+          this.addError('Could not delete comment try again later?');
+          console.error(err);
+        })
+        .finally(() => {
+          this.init();
         });
     },
   },
