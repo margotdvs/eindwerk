@@ -37,8 +37,8 @@ export default {
     return {
       authStore: useAuthStore(),
       loginData: {
-        email: 'korneel.eeckhout@gmail.com',
-        password: 'JNbEj27usbGzUhvZlAwh',
+        email: '',
+        password: '',
       },
     };
   },

@@ -83,6 +83,8 @@
 <script>
 import { useAuthStore } from '~/stores/auth.js';
 import { mapState } from 'pinia';
+import { useNotificationsStore } from '~/stores/notifications.js';
+import { mapActions } from 'pinia';
 
 export default {
   name: 'Game',
@@ -107,6 +109,7 @@ export default {
     ...mapState(useAuthStore, ['accessToken']),
   },
   methods: {
+    ...mapActions(useNotificationsStore, ['addError', 'addMessage']),
     init() {
       document.getElementById('loader').classList.add('loader');
       fetch(
@@ -128,7 +131,6 @@ export default {
           this.review = this.game.review;
           this.comments = this.game.comments;
           this.tags = this.game.tags;
-          console.log(this.game);
         })
         .catch((err) => {
           console.error(err);
@@ -151,11 +153,10 @@ export default {
       fetch('https://margot.fullstacksyntra.be/items/comments', options)
         .then((response) => response.json())
         .then((response) => console.log(response))
-        .then((body) => {
+        .then(() => {
           this.init();
+          this.addMessage(`Comment added`);
           document.getElementById('comment').value = '';
-
-          console.log(body);
         })
         .catch((err) => console.error(err))
         .finally(() => {
@@ -172,6 +173,9 @@ export default {
 
       fetch(`https://margot.fullstacksyntra.be/items/games/${this.id}`, options)
         .then((response) => console.log(response))
+        .then(() => {
+          this.addMessage(`Deleted game`);
+        })
         .catch((err) => {
           if (err.message === '401') {
             this.logout();
@@ -195,6 +199,9 @@ export default {
         options,
       )
         .then((response) => console.log(response))
+        .then(() => {
+          this.addMessage(`Comment deleted`);
+        })
         .catch((err) => {
           if (err.message === '401') {
             this.logout();
