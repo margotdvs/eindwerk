@@ -23,12 +23,12 @@
             label="Password"
             validation="required"
           />
-          <FormKit
+          <!-- <FormKit
             type="password"
             name="newPassword"
             label="New Password"
             validation="required"
-          />
+          /> -->
         </FormKit>
       </div>
     </div>
