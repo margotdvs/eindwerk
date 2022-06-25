@@ -4,11 +4,11 @@
     <div class="profile-container">
       <div class="profile-left"><div class="profile-image">image</div></div>
       <div class="profile-details">
-        <FormKit type="form" submit-label="Edit">
+        <FormKit type="form" submit-label="Edit" v-model="profileData">
           <FormKit
             type="text"
-            name="username"
-            label="Username"
+            name="first_name"
+            label="Name"
             validation="required"
           />
           <FormKit
@@ -36,12 +36,46 @@
 </template>
 
 <script>
+import { useAuthStore } from '~/stores/auth.js';
+import { mapState } from 'pinia';
+
 definePageMeta({
   middleware: ['auth'],
 });
 
 export default {
   name: 'Profile',
+  data() {
+    return {
+      profileData: [],
+    };
+  },
+  computed: {
+    ...mapState(useAuthStore, ['accessToken']),
+  },
+  created() {
+    this.fetchProfile();
+  },
+  methods: {
+    fetchProfile() {
+      return fetch(`https://margot.fullstacksyntra.be/users/me`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.accessToken}`,
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((body) => {
+          this.profileData = body.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+  },
 };
 </script>
 

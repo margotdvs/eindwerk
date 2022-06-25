@@ -10,7 +10,7 @@
       v-model="curFile"
       :ignore="true"
       type="file"
-      accept=".jpg, .jpeg, .png, .gif"
+      accept=".jpg, .jpeg, .png, .gif, .webp"
     />
   </div>
 </template>
@@ -105,7 +105,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.image-input {
-}
-</style>
+<style lang="scss"></style>

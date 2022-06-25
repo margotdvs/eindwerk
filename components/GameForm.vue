@@ -171,6 +171,11 @@ export default {
     display: block;
     width: 100%;
     height: auto;
+    border-radius: $border-radius;
   }
+}
+
+.formkit-file-name {
+  margin: 0 0.5rem 0 0;
 }
 </style>
