@@ -180,13 +180,6 @@ export default {
     gap: 1rem;
 
     @media screen and(max-width: 600px) {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: 11rem 3rem;
-      gap: 1rem;
-    }
-
-    @media screen and(max-width: 550px) {
       display: flex;
       flex-direction: column;
     }

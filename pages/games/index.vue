@@ -1,7 +1,13 @@
 <template>
   <div class="games-overview">
     <h1>Games Overview</h1>
-    <Filter />
+    <div class="toggle-filters">
+      <Btn @click="menuOpen = !menuOpen" v-if="menuOpen">Show filters</Btn>
+      <Btn @click="menuOpen = !menuOpen" v-if="!menuOpen">Hide filters</Btn>
+    </div>
+    <div v-if="!menuOpen">
+      <Filter />
+    </div>
     <div class="cards-container">
       <OverviewCard v-for="game in games" :key="game.id">
         <div class="card-image">
@@ -38,6 +44,7 @@ export default {
       games: [],
       limit: 8,
       totalItems: 0,
+      menuOpen: false,
     };
   },
   watch: {
@@ -209,6 +216,12 @@ export default {
 
   .btn {
     margin: 0 0.5rem;
+  }
+}
+
+.toggle-filters {
+  @media screen and (min-width: 600px) {
+    display: none;
   }
 }
 </style>
