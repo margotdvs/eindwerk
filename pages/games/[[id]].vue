@@ -163,7 +163,13 @@ export default {
 
       fetch(`https://margot.fullstacksyntra.be/items/games/${this.id}`, options)
         .then((response) => console.log(response))
-        .catch((err) => console.error(err))
+        .catch((err) => {
+          if (err.message === '401') {
+            this.logout();
+          }
+          this.addError('Could not delete game, try again later?');
+          console.error(err);
+        })
         .finally(() => {
           this.$router.push('/games');
         });

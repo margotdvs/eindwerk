@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     fetchGame() {
-      // document.getElementById('loader').classList.add('loader');
+      document.getElementById('loader').classList.add('loader');
       return fetch(
         `https://margot.fullstacksyntra.be/items/games/${this.gameId}`,
         {
@@ -45,11 +45,15 @@ export default {
           return body.data;
         })
         .catch((err) => {
+          if (err.message === '401') {
+            this.logout();
+          }
+          this.addError('Could not edit game, try again later?');
           console.error(err);
+        })
+        .finally(() => {
+          document.getElementById('loader').classList.remove('loader');
         });
-      // .finally(() => {
-      //   document.getElementById('loader').classList.remove('loader');
-      // });
     },
   },
 };

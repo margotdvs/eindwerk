@@ -72,6 +72,10 @@ export default {
           this.profileData = body.data;
         })
         .catch((err) => {
+          if (err.message === '401') {
+            this.logout();
+          }
+          this.addError('Could not load profile, try again later?');
           console.error(err);
         });
     },
