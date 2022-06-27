@@ -6,12 +6,8 @@
         <h3>About Us</h3>
 
         <div class="contact-left__image">
-          <img
-            src="https://64.media.tumblr.com/501527ec499a6cbf61079240c3d8a9b4/tumblr_nwtvr53yWg1up7w6go1_500.jpg"
-          />
-          <img
-            src="https://64.media.tumblr.com/28f43a715547490b90bfdd1f082e4a96/tumblr_nwtvr53yWg1up7w6go2_500.jpg"
-          />
+          <img src="~~/assets/images/contact_1.jpg" />
+          <img src="~~/assets/images/contact_2.jpg" />
         </div>
         <p>
           Gamerviews is a website with reviews written by gamers for gamers.
