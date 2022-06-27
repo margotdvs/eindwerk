@@ -22,6 +22,7 @@
         v-bind:src="
           'https://margot.fullstacksyntra.be/assets/' + game.title_image
         "
+        alt=""
       />
     </div>
     <div class="game-description">
@@ -35,6 +36,7 @@
       <div class="game-review-image">
         <img
           v-bind:src="'https://margot.fullstacksyntra.be/assets/' + item.image"
+          alt=""
         />
       </div>
       <span> {{ item.text }} </span>

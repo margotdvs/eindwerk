@@ -7,21 +7,21 @@
         target="_blank"
         rel="noreferrer noopener"
       >
-        <img src="~~/assets/images/facebook.png" />
+        <img src="~~/assets/images/facebook.png" alt="" />
       </NuxtLink>
       <NuxtLink
         to="https://www.instagram.com"
         target="_blank"
         rel="noreferrer noopener"
       >
-        <img src="~~/assets/images/instagram.png" />
+        <img src="~~/assets/images/instagram.png" alt="" />
       </NuxtLink>
       <NuxtLink
         to="https://www.linkedin.com"
         target="_blank"
         rel="noreferrer noopener"
       >
-        <img src="~~/assets/images/linkedin.png" />
+        <img src="~~/assets/images/linkedin.png" alt="" />
       </NuxtLink>
     </div>
   </div>

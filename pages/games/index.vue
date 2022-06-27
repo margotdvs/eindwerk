@@ -15,6 +15,7 @@
             :src="
               'https://margot.fullstacksyntra.be/assets/' + game.title_image
             "
+            alt=""
           />
         </div>
         <div class="card-title">
