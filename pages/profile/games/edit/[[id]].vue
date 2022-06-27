@@ -1,5 +1,8 @@
 <template>
   <div>
+    <NuxtLink :to="'/games/' + gameId">
+      <Btn><span class="arrow">ᐸ</span> Back</Btn>
+    </NuxtLink>
     <h1>Edit Game</h1>
 
     <GameForm v-if="gameData" :game-data="gameData" />
@@ -9,6 +12,8 @@
 <script>
 import { mapState } from 'pinia';
 import { useAuthStore } from '~/stores/auth.js';
+import { useNotificationsStore } from '~/stores/notifications.js';
+import { mapActions } from 'pinia';
 
 export default {
   name: 'EditGame',
@@ -16,6 +21,7 @@ export default {
     return {
       gameId: this.$route.params.id,
       gameData: null,
+      authStore: useAuthStore(),
     };
   },
   computed: {
@@ -25,6 +31,8 @@ export default {
     this.fetchGame();
   },
   methods: {
+    ...mapActions(useNotificationsStore, ['addError', 'addMessage']),
+    ...mapActions(useAuthStore, ['logout']),
     fetchGame() {
       document.getElementById('loader').classList.add('loader');
       return fetch(
@@ -38,6 +46,10 @@ export default {
         },
       )
         .then((response) => {
+          if (response.status === 401) {
+            throw new Error('401');
+          }
+
           return response.json();
         })
         .then((body) => {
@@ -45,11 +57,13 @@ export default {
           return body.data;
         })
         .catch((err) => {
-          if (err.message === '401') {
-            this.logout();
-          }
-          this.addError('Could not edit game, try again later?');
           console.error(err);
+          if (err.message === '401') {
+            this.$router.push('/games/' + this.gameId);
+            this.authStore.logout();
+          }
+
+          this.addError('Could not edit game, try again later?');
         })
         .finally(() => {
           document.getElementById('loader').classList.remove('loader');

@@ -4,7 +4,7 @@
     <div class="profile-container">
       <div class="profile-left"><div class="profile-image">image</div></div>
       <div class="profile-details">
-        <FormKit type="form" submit-label="Edit" v-model="profileData">
+        <FormKit type="form" :actions="false" v-model="profileData">
           <FormKit
             type="text"
             name="first_name"
@@ -38,6 +38,8 @@
 <script>
 import { useAuthStore } from '~/stores/auth.js';
 import { mapState } from 'pinia';
+import { useNotificationsStore } from '~/stores/notifications.js';
+import { mapActions } from 'pinia';
 
 definePageMeta({
   middleware: ['auth'],
@@ -57,6 +59,8 @@ export default {
     this.fetchProfile();
   },
   methods: {
+    ...mapActions(useNotificationsStore, ['addError', 'addMessage']),
+    ...mapActions(useAuthStore, ['logout']),
     fetchProfile() {
       return fetch(`https://margot.fullstacksyntra.be/users/me`, {
         method: 'GET',
@@ -73,7 +77,7 @@ export default {
         })
         .catch((err) => {
           if (err.message === '401') {
-            this.logout();
+            this.authStore.logout();
           }
           this.addError('Could not load profile, try again later?');
           console.error(err);

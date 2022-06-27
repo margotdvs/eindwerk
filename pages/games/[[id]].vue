@@ -107,6 +107,7 @@ export default {
   },
   computed: {
     ...mapState(useAuthStore, ['accessToken']),
+    ...mapActions(useAuthStore, ['logout']),
   },
   methods: {
     ...mapActions(useNotificationsStore, ['addError', 'addMessage']),
@@ -172,16 +173,23 @@ export default {
       };
 
       fetch(`https://margot.fullstacksyntra.be/items/games/${this.id}`, options)
-        .then((response) => console.log(response))
+        .then((response) => {
+          if (response.status === 401) {
+            throw new Error('401');
+          }
+          console.log(response);
+        })
         .then(() => {
-          this.addMessage(`Deleted game`);
+          this.addMessage(`Game deleted`);
         })
         .catch((err) => {
+          console.error(err);
+
           if (err.message === '401') {
-            this.logout();
+            this.$router.push('/games/' + this.id);
+            this.authStore.logout();
           }
           this.addError('Could not delete game try again later?');
-          console.error(err);
         })
         .finally(() => {
           this.$router.push('/games');
@@ -198,16 +206,23 @@ export default {
         `https://margot.fullstacksyntra.be/items/comments/${index}`,
         options,
       )
-        .then((response) => console.log(response))
+        .then((response) => {
+          if (response.status === 401) {
+            throw new Error('401');
+          }
+          console.log(response);
+        })
         .then(() => {
           this.addMessage(`Comment deleted`);
         })
         .catch((err) => {
-          if (err.message === '401') {
-            this.logout();
-          }
-          this.addError('Could not delete comment try again later?');
           console.error(err);
+          if (err.message === '401') {
+            this.init();
+            this.authStore.logout();
+          }
+
+          this.addError('Could not delete comment, try again later?');
         })
         .finally(() => {
           this.init();

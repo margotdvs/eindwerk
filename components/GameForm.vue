@@ -149,15 +149,17 @@ export default {
           console.log(body);
         })
         .catch((err) => {
+          console.error(err);
+
           if (err.message === '401') {
-            this.logout();
+            this.$router.push('/games');
+            this.authStore.logout();
           }
           this.addError('Could not save game, try again later?');
-          console.error(err);
         })
         .finally(() => {
           document.getElementById('loader').classList.remove('loader');
-          this.$router.push('/games/' + this.$route.params.id);
+          this.$router.push('/games');
         });
     },
   },

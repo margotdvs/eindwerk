@@ -125,7 +125,6 @@ export default {
         .then((body) => {
           this.games = body.data;
           this.totalItems = body.meta.filter_count;
-          console.log(this.games);
           return body.data;
         })
         .catch((err) => {
