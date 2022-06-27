@@ -87,6 +87,7 @@ export default {
       imageInput: createInput(ImageInput),
       data: this.initData(),
       isUploadingFile: false,
+      authStore: useAuthStore(),
     };
   },
   computed: {
